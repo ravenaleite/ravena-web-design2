@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravena Web Design - Sites Profissionais</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- CANVAS 3D -->
+<canvas id="canvas3d"></canvas>
+<div class="canvas-overlay" aria-hidden="true"></div>
+<div class="scene-card" id="sceneCard" aria-hidden="true"></div>
+
+<!-- NAVEGAÇÃO -->
+<nav>
+    <h1>Ravena Web Design</h1>
+    <p>Sites Profissionais que VENDEM</p>
+</nav>
+
+<!-- CONTAINER PRINCIPAL -->
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h2>Sites que VENDEM 🚀</h2>
+        <p>Criei +20 landing pages que geraram mais de R$ 100mil em vendas para meus clientes.</p>
+        <a href="#contato" class="button">Quero meu site!</a>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="section">
+        <h3>📊 Resultados Reais</h3>
+        <p>Veja o que meus clientes conquistaram:</p>
+        
+        <div class="services">
+            <div class="service-card">
+                <h4>Maria Eduarda - Personal Trainer</h4>
+                <p><strong style="color: var(--color-wine-light);">+600% em conversões</strong></p>
+                <p>Salgueiro, PE</p>
+                <p style="color: var(--color-text-muted); margin-top: 15px;">De 5 para 35 agendamentos</p>
+            </div>
+            
+            <div class="service-card">
+                <h4>João - Coach Empresarial</h4>
+                <p><strong style="color: var(--color-wine-light);">+R$ 50.000 em 3 meses</strong></p>
+                <p>Recife, PE</p>
+                <p style="color: var(--color-text-muted); margin-top: 15px;">De 2 para 12 clientes</p>
+            </div>
+            
+            <div class="service-card">
+                <h4>Ana Silva - Consultora Beleza</h4>
+                <p><strong style="color: var(--color-wine-light);">Saiu do zero para online</strong></p>
+                <p>Mauriti, CE</p>
+                <p style="color: var(--color-text-muted); margin-top: 15px;">25 contatos em 30 dias</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- O QUE EU FAÇO -->
+    <div class="section">
+        <h3>✨ O que você recebe:</h3>
+        <p>Um website profissional com:</p>
+        
+        <div class="services">
+            <div class="service-card">
+                <h4>🎨 Design Profissional</h4>
+                <p>Moderno, responsivo e otimizado para conversão</p>
+            </div>
+            
+            <div class="service-card">
+                <h4>📱 Totalmente Responsivo</h4>
+                <p>Funciona perfeito em celular, tablet e desktop</p>
+            </div>
+            
+            <div class="service-card">
+                <h4>🔗 Integração WhatsApp</h4>
+                <p>Cliente vê seu trabalho e já pode chamar</p>
+            </div>
+
+            <div class="service-card">
+                <h4>📍 Google Maps Integrado</h4>
+                <p>Mostra sua localização profissionalmente</p>
+            </div>
+
+            <div class="service-card">
+                <h4>🔍 SEO Otimizado</h4>
+                <p>Seu site aparece no Google</p>
+            </div>
+
+            <div class="service-card">
+                <h4>📞 Suporte Incluído</h4>
+                <p>Estou aqui pra ajudar quando precisar</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PREÇOS -->
+    <div class="section">
+        <h3>💰 Planos & Preços</h3>
+        <p>Escolha o plano que faz sentido pro seu negócio:</p>
+        
+        <div class="prices">
+            <div class="price-card">
+                <h4>Básico</h4>
+                <div class="price">R$ 500</div>
+                <p style="color: #999; margin-bottom: 20px;">Perfeito para começar</p>
+                <ul>
+                    <li>Site profissional 3-5 páginas</li>
+                    <li>Responsivo (celular, tablet, desktop)</li>
+                    <li>Formulário de contato</li>
+                    <li>Email profissional</li>
+                    <li>Suporte 30 dias</li>
+                </ul>
+                <a href="#contato" class="button">Contratar</a>
+            </div>
+
+            <div class="price-card">
+                <h4>⭐ Profissional</h4>
+                <div class="price">R$ 1.000</div>
+                <p style="color: var(--color-wine-light); margin-bottom: 20px;"><strong>RECOMENDADO!</strong></p>
+                <ul>
+                    <li>Tudo do plano Básico +</li>
+                    <li>Blog integrado</li>
+                    <li>Galeria de projetos</li>
+                    <li>Sistema de agendamento</li>
+                    <li>WhatsApp integrado</li>
+                    <li>Suporte 90 dias</li>
+                    <li>SEO otimizado</li>
+                </ul>
+                <a href="#contato" class="button">Contratar Agora</a>
+            </div>
+
+            <div class="price-card">
+                <h4>Premium</h4>
+                <div class="price">R$ 1.500</div>
+                <p style="color: #999; margin-bottom: 20px;">Máxima conversão</p>
+                <ul>
+                    <li>Tudo do Profissional +</li>
+                    <li>Email marketing automático</li>
+                    <li>Analytics avançado</li>
+                    <li>Consultoria SEO</li>
+                    <li>Manutenção 6 meses</li>
+                    <li>Backup automático</li>
+                    <li>Suporte prioritário</li>
+                </ul>
+                <a href="#contato" class="button">Contratar</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTATO -->
+    <div class="contact" id="contato">
+        <h3>Pronto para aumentar suas vendas? 🚀</h3>
+        <p>Novos clientes recebem consultoria grátis de 15 minutos!</p>
+        
+        <div class="contact-info">
+            📞 Ligue ou mande WhatsApp
+        </div>
+        
+        <div class="contact-info" style="font-size: 24px; margin: 20px 0;">
+            <strong>(87) 99161-4428</strong><br>
+            <strong>(88) 99474-4444</strong>
+        </div>
+        
+        <a href="https://wa.me/5587991614428" class="button">Conversar no WhatsApp</a>
+        <a href="mailto:ravas2304@gmail.com" class="button">Enviar Email</a>
+        
+        <div style="margin-top: 30px;">
+            <p style="color: #999;">📍 Salgueiro, PE | Mauriti, CE</p>
+            <p style="color: #999;">💻 GitHub: https://github.com/devsravenacris-art</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 Ravena Web Design - Criado com paixão</p>
+    <p style="margin-top: 20px; color: #666;">Ravena Leite | Desenvolvedora Web | Freelancer</p>
+</footer>
+
+<!-- IMPORTAR SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
