@@ -1,13 +1,20 @@
 :root {
     --color-bg: #000000;
-    --color-wine: #7a1f2b;
-    --color-wine-light: #a6394a;
-    --color-wine-rgb: 122, 31, 43;
-    --color-wine-light-rgb: 166, 57, 74;
+    --color-moss: #2f5942;
+    --color-moss-light: #4f9468;
+    --color-moss-rgb: 47, 89, 66;
+    --color-moss-light-rgb: 79, 148, 104;
     --color-text: #ffffff;
     --color-text-muted: #cccccc;
     --color-text-subtle: #999999;
     --color-text-faint: #666666;
+
+    --font-display: 'Poppins', Arial, sans-serif;
+    --font-body: 'Inter', Arial, sans-serif;
+
+    /* Tamanho da cena 3D (canvas + cartão), sincronizado com script.js */
+    --hero-size: 360px;
+    --hero-gap: 120px;
 }
 
 * {
@@ -16,20 +23,31 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-body);
     background: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* CANVAS 3D */
+h1, h2, h3, h4, .price-card .price {
+    font-family: var(--font-display);
+}
+
+/* CANVAS 3D — absolute (preso ao topo do documento) para nunca "vazar"
+   por trás do conteúdo ao rolar a página, como acontecia com position:fixed */
 #canvas3d {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 360px;
+    height: var(--hero-size);
     z-index: 0;
     pointer-events: none;
     display: block;
@@ -37,11 +55,11 @@ body {
 
 /* Overlay sutil sobre o canvas para profundidade */
 .canvas-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 360px;
+    height: var(--hero-size);
     z-index: 1;
     background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.55));
     pointer-events: none;
@@ -50,32 +68,33 @@ body {
 
 /* Cartão elegante que destaca o 3D (centralizado no topo) */
 .scene-card {
-    width: 360px;
-    height: 360px;
-    margin: -180px auto 0;
+    width: min(var(--hero-size), 88vw);
+    height: min(var(--hero-size), 88vw);
+    margin: calc(var(--hero-size) / -2) auto 0;
     border-radius: 20px;
     backdrop-filter: blur(8px) saturate(120%);
-    background: linear-gradient(135deg, rgba(var(--color-wine-rgb),0.06), rgba(var(--color-wine-rgb),0.02));
-    border: 1px solid rgba(var(--color-wine-rgb),0.12);
+    background: linear-gradient(135deg, rgba(var(--color-moss-rgb),0.06), rgba(var(--color-moss-rgb),0.02));
+    border: 1px solid rgba(var(--color-moss-rgb),0.12);
     box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
     position: relative;
     z-index: 2;
     pointer-events: auto;
+    cursor: pointer;
 }
 
 /* NAVEGAÇÃO */
 nav {
     background: rgba(0, 0, 0, 0.95);
-    border-bottom: 3px solid var(--color-wine);
+    border-bottom: 3px solid var(--color-moss);
     padding: 20px;
     text-align: center;
     position: relative;
     z-index: 10;
-    margin-top: 300px;
+    margin-top: calc(var(--hero-size) / 2 + var(--hero-gap));
 }
 
 nav h1 {
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-size: 28px;
     margin-bottom: 10px;
 }
@@ -98,17 +117,17 @@ nav p {
 .hero {
     text-align: center;
     padding: 60px 20px;
-    border: 2px solid var(--color-wine);
+    border: 2px solid var(--color-moss);
     border-radius: 10px;
     margin: 40px 0;
-    background: rgba(var(--color-wine-rgb), 0.05);
+    background: rgba(var(--color-moss-rgb), 0.05);
 }
 
 .hero h2 {
     font-size: 36px;
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(var(--color-wine-light-rgb), 0.3);
+    text-shadow: 0 0 10px rgba(var(--color-moss-light-rgb), 0.3);
 }
 
 .hero p {
@@ -119,7 +138,7 @@ nav p {
 
 /* BOTÕES */
 .button {
-    background: var(--color-wine);
+    background: var(--color-moss);
     color: white;
     padding: 15px 40px;
     border: none;
@@ -130,12 +149,12 @@ nav p {
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s;
-    box-shadow: 0 0 20px rgba(var(--color-wine-rgb), 0.3);
+    box-shadow: 0 0 20px rgba(var(--color-moss-rgb), 0.3);
 }
 
 .button:hover {
-    background: var(--color-wine-light);
-    box-shadow: 0 0 30px rgba(var(--color-wine-light-rgb), 0.6);
+    background: var(--color-moss-light);
+    box-shadow: 0 0 30px rgba(var(--color-moss-light-rgb), 0.6);
     transform: translateY(-3px);
 }
 
@@ -143,15 +162,15 @@ nav p {
 .section {
     margin: 40px 0;
     padding: 30px;
-    border-left: 4px solid var(--color-wine);
-    background: rgba(var(--color-wine-rgb), 0.02);
+    border-left: 4px solid var(--color-moss);
+    background: rgba(var(--color-moss-rgb), 0.02);
 }
 
 .section h3 {
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-size: 24px;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(var(--color-wine-light-rgb), 0.3);
+    text-shadow: 0 0 10px rgba(var(--color-moss-light-rgb), 0.3);
 }
 
 .section p {
@@ -170,7 +189,7 @@ nav p {
 
 .service-card {
     background: #000;
-    border: 2px solid var(--color-wine);
+    border: 2px solid var(--color-moss);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -178,12 +197,12 @@ nav p {
 }
 
 .service-card:hover {
-    box-shadow: 0 0 20px rgba(var(--color-wine-rgb), 0.3);
+    box-shadow: 0 0 20px rgba(var(--color-moss-rgb), 0.3);
     transform: translateY(-5px);
 }
 
 .service-card h4 {
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-size: 18px;
     margin-bottom: 15px;
 }
@@ -203,24 +222,24 @@ nav p {
 
 .price-card {
     background: #000;
-    border: 3px solid var(--color-wine);
+    border: 3px solid var(--color-moss);
     padding: 30px;
     border-radius: 10px;
     text-align: center;
 }
 
 .price-card h4 {
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-size: 22px;
     margin-bottom: 15px;
 }
 
 .price-card .price {
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-size: 36px;
     font-weight: bold;
     margin: 20px 0;
-    text-shadow: 0 0 10px rgba(var(--color-wine-light-rgb), 0.3);
+    text-shadow: 0 0 10px rgba(var(--color-moss-light-rgb), 0.3);
 }
 
 .price-card ul {
@@ -232,20 +251,20 @@ nav p {
 .price-card li {
     color: #999;
     padding: 8px 0;
-    border-bottom: 1px solid rgba(var(--color-wine-rgb), 0.2);
+    border-bottom: 1px solid rgba(var(--color-moss-rgb), 0.2);
 }
 
 .price-card li:before {
     content: "✓ ";
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-weight: bold;
     margin-right: 10px;
 }
 
 /* CONTATO */
 .contact {
-    background: rgba(var(--color-wine-rgb), 0.1);
-    border: 2px solid var(--color-wine);
+    background: rgba(var(--color-moss-rgb), 0.1);
+    border: 2px solid var(--color-moss);
     padding: 40px;
     border-radius: 10px;
     text-align: center;
@@ -253,7 +272,7 @@ nav p {
 }
 
 .contact h3 {
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     font-size: 28px;
     margin-bottom: 20px;
 }
@@ -266,14 +285,14 @@ nav p {
 
 .contact-info {
     font-size: 20px;
-    color: var(--color-wine-light);
+    color: var(--color-moss-light);
     margin: 15px 0;
 }
 
 /* FOOTER */
 footer {
     background: #000;
-    border-top: 3px solid var(--color-wine);
+    border-top: 3px solid var(--color-moss);
     padding: 30px;
     text-align: center;
     color: #999;
@@ -285,9 +304,54 @@ footer p {
 }
 
 /* RESPONSIVO */
+
+/* Tablets (ex: iPad) */
+@media (max-width: 1024px) {
+    :root {
+        --hero-size: 280px;
+    }
+
+    .container {
+        padding: 20px 24px;
+    }
+
+    .hero h2 {
+        font-size: 30px;
+    }
+
+    .services,
+    .prices {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+/* Celulares (Android / iPhone) em modo retrato/paisagem */
 @media (max-width: 768px) {
+    :root {
+        --hero-size: 220px;
+        --hero-gap: 90px;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .hero {
+        padding: 40px 16px;
+        margin: 24px 0;
+    }
+
     .hero h2 {
         font-size: 24px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 20px;
+        margin: 24px 0;
     }
 
     .section h3 {
@@ -298,11 +362,51 @@ footer p {
         font-size: 20px;
     }
 
-    #canvas3d {
-        height: 200px;
+    .services,
+    .prices {
+        grid-template-columns: 1fr;
     }
 
-    nav {
-        margin-top: 200px;
+    .price-card {
+        padding: 20px;
+    }
+
+    .contact {
+        padding: 24px 16px;
+    }
+
+    .contact-info[style] {
+        font-size: 18px !important;
+    }
+
+    .button {
+        padding: 14px 28px;
+        font-size: 15px;
+        width: 100%;
+        margin: 8px 0;
+    }
+}
+
+/* Celulares pequenos (ex: iPhone SE) */
+@media (max-width: 420px) {
+    :root {
+        --hero-size: 170px;
+        --hero-gap: 70px;
+    }
+
+    nav h1 {
+        font-size: 18px;
+    }
+
+    .hero h2 {
+        font-size: 20px;
+    }
+
+    .section h3 {
+        font-size: 16px;
+    }
+
+    .price-card .price {
+        font-size: 28px;
     }
 }
