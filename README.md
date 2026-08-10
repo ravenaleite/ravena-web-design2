@@ -1,60 +1,64 @@
 # Ravena Web Design - Landing Page 3D
 
-Website profissional com animação 3D para apresentar serviços de criação de sites.
+Website profissional com cena 3D interativa para apresentar serviços de criação de sites.
 
 ## 📁 Estrutura do Projeto
 
 ```
-ravena-web-design/
+WEB SITE NOVO VS CODE/
 ├── index.html          # Página principal
-├── README.md           # Este arquivo
-├── css/
-│   └── styles.css      # Estilos do site
-├── js/
-│   └── script.js       # Animação 3D
-└── img/
-    └── (suas imagens aqui)
+├── styles.css          # Estilos do site
+├── script.js            # Cena 3D (Three.js)
+└── README.md            # Este arquivo
 ```
 
 ## 🎨 Características
 
-- ✅ Animação 3D com THREE.js
-- ✅ Design preto e laranja (#ff8800)
-- ✅ Totalmente responsivo (mobile, tablet, desktop)
+- ✅ Cena 3D interativa com Three.js (reage a mouse e toque, em qualquer dispositivo)
+- ✅ Paleta preto / creme, com vermelho como cor de destaque única
+- ✅ Tipografia Amatic SC (títulos) + Inter (texto)
+- ✅ Totalmente responsivo (mobile, tablet, desktop) com breakpoints em 420px, 768px e 1024px
 - ✅ Otimizado para conversão
 - ✅ Integração WhatsApp
-- ✅ Fácil de editar e customizar
 
 ## 🚀 Como Usar
 
 ### 1. No VS Code
 
-1. Abra a pasta `ravena-web-design` no VS Code
+1. Abra esta pasta no VS Code
 2. Instale a extensão "Live Server"
 3. Clique com direito em `index.html` → "Open with Live Server"
-4. Site abrirá em `http://localhost:5500`
+4. Site abrirá em `http://localhost:5500` (ou porta similar)
 
 ### 2. Editar Conteúdo
 
 **HTML** → Edite `index.html` (estrutura, textos)
-**CSS** → Edite `css/styles.css` (cores, fontes, layout)
-**JavaScript** → Edite `js/script.js` (animação 3D)
+**CSS** → Edite `styles.css` (cores, fontes, layout)
+**JavaScript** → Edite `script.js` (cena 3D)
 
 ### 3. Customizar Cores
 
-No arquivo `css/styles.css`, procure por `#ff8800` (laranja):
+As cores ficam centralizadas em variáveis no topo de `styles.css`, dentro de `:root`:
 
 ```css
-/* Para mudar a cor laranja, substitua #ff8800 por outra cor */
-color: #ff8800;  /* Laranja principal */
+:root {
+    --color-bg: #050403;        /* fundo */
+    --color-fg: #f2ede1;        /* títulos e texto de destaque (creme) */
+    --color-accent: #e8402c;    /* cor de ação (botões) */
+    --color-accent-light: #ff6647; /* hover dos botões */
+}
 ```
 
-### 4. Upload no Netlify
+Troque esses valores para mudar a paleta inteira do site de uma vez. As cores da gema 3D ficam em `script.js`, nas constantes `gemMat`, `coreMat` e nas luzes (`hemi`, `key`, `rim`).
 
-1. Compacte a pasta em ZIP: `ravena-web-design.zip`
-2. Va para: https://app.netlify.com/drop
-3. Arraste o ZIP para fazer upload
-4. Pronto! Site fica online em segundos
+### 4. Publicar (Netlify + GitHub)
+
+O repositório já está conectado ao GitHub (`devsravenacris-art/ravena-web-design2`). Fluxo recomendado:
+
+1. Suba as alterações pro GitHub (`git add`, `git commit`, `git push`)
+2. No [Netlify](https://app.netlify.com), importe o projeto conectando a conta GitHub e escolhendo esse repositório
+3. Não é necessário comando de build — é um site estático (publish directory: `.`)
+4. A cada novo `git push`, o Netlify publica a atualização automaticamente
 
 ## 📝 Edições Comuns
 
@@ -90,7 +94,7 @@ Procure em `index.html` pelas seções de preços:
 - HTML5
 - CSS3
 - JavaScript (ES6+)
-- THREE.js (animação 3D)
+- Three.js (cena 3D)
 - Netlify (hospedagem)
 
 ## 📱 Navegadores Suportados
@@ -99,14 +103,13 @@ Procure em `index.html` pelas seções de preços:
 - Firefox
 - Safari
 - Edge
-- Mobile browsers
+- Navegadores mobile (Android e iOS)
 
 ## 🎯 Dicas de Uso
 
-1. **Para clientes transportadoras**: Customize os "cases" com nomes de transportes
-2. **Para outras áreas**: Troque os "cases" pelas áreas relevantes (personal trainer, coach, etc)
-3. **Cores**: Fácil mudar laranja para outra cor
-4. **Animação**: Ajuste velocidade em `js/script.js`
+1. **Para clientes de outras áreas**: troque os "cases" (Resultados Reais) pelo segmento relevante (personal trainer, coach, consultoria, etc.)
+2. **Cores**: ajuste fácil trocando as variáveis em `:root` no `styles.css`
+3. **Cena 3D**: ajuste velocidade de giro e sensibilidade ao toque em `script.js`
 
 ## 📧 Contato & Suporte
 

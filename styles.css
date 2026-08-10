@@ -257,7 +257,7 @@ nav p {
 }
 
 .price-card li {
-    color: #999;
+    color: var(--color-text-subtle);
     padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -305,7 +305,7 @@ footer {
     border-top: 1px solid rgba(var(--color-fg-rgb), 0.25);
     padding: 30px;
     text-align: center;
-    color: #999;
+    color: var(--color-text-subtle);
     margin-top: 60px;
 }
 
