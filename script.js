@@ -14,18 +14,18 @@ try {
     camera.position.set(0, 0, 6);
 
     // Objeto principal: corvo estilizado low-poly (referência ao nome Ravena),
-    // em verde-musgo metálico sobre preto — assinatura visual da marca.
+    // em bronze/dourado metálico sobre preto — assinatura visual da marca.
     ravenMat = new THREE.MeshPhysicalMaterial({
-        color: 0x14251c,
+        color: 0x3a2d10,
         metalness: 0.88,
         roughness: 0.22,
         clearcoat: 0.8,
         clearcoatRoughness: 0.15,
         reflectivity: 0.8,
-        emissive: 0x0d1f14,
+        emissive: 0x1a1206,
         flatShading: true,
     });
-    const eyeMat = new THREE.MeshBasicMaterial({ color: 0x6fbf8f });
+    const eyeMat = new THREE.MeshBasicMaterial({ color: 0xffd873 });
 
     raven = new THREE.Group();
 
@@ -89,13 +89,13 @@ try {
     particles = new THREE.Points(particlesGeo, particlesMat);
     scene.add(particles);
 
-    // Iluminação sofisticada (tons de verde musgo)
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x1a2420, 0.6);
+    // Iluminação sofisticada (tons dourados/âmbar)
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x241f14, 0.6);
     scene.add(hemi);
-    key = new THREE.PointLight(0x6fbf8f, 1.2, 12);
+    key = new THREE.PointLight(0xe0b84b, 1.2, 12);
     key.position.set(4, 2, 6);
     scene.add(key);
-    rim = new THREE.DirectionalLight(0x2f5942, 0.6);
+    rim = new THREE.DirectionalLight(0x8a6d1f, 0.6);
     rim.position.set(-5, -2, 5);
     scene.add(rim);
 } catch (err) {
@@ -136,8 +136,8 @@ if (renderer) {
 
     // Toque/clique no corvo: as asas abrem, a câmera aproxima e a luz pulsa
     const sceneCard = document.getElementById('sceneCard');
-    const baseEmissive = new THREE.Color(0x0d1f14);
-    const burstEmissive = new THREE.Color(0x2f8f5a);
+    const baseEmissive = new THREE.Color(0x1a1206);
+    const burstEmissive = new THREE.Color(0xffcf6b);
     const wingRestZ = { left: wingLeft.rotation.z, right: wingRight.rotation.z };
     let burst = 0;
     function triggerBurst() {
