@@ -1,15 +1,16 @@
 :root {
-    --color-bg: #000000;
-    --color-gold: #8a6d1f;
-    --color-gold-light: #e0b84b;
-    --color-gold-rgb: 138, 109, 31;
-    --color-gold-light-rgb: 224, 184, 75;
+    --color-bg: #050403;
+    --color-fg: #f2ede1;
+    --color-fg-rgb: 242, 237, 225;
+    --color-accent: #e8402c;
+    --color-accent-light: #ff6647;
+    --color-accent-rgb: 232, 64, 44;
     --color-text: #ffffff;
     --color-text-muted: #cccccc;
     --color-text-subtle: #999999;
     --color-text-faint: #666666;
 
-    --font-display: 'Poppins', Arial, sans-serif;
+    --font-display: 'Amatic SC', Arial, sans-serif;
     --font-body: 'Inter', Arial, sans-serif;
 
     /* Tamanho da cena 3D (canvas + cartão), sincronizado com script.js */
@@ -73,8 +74,8 @@ h1, h2, h3, h4, .price-card .price {
     margin: calc(var(--hero-size) / -2) auto 0;
     border-radius: 20px;
     backdrop-filter: blur(8px) saturate(120%);
-    background: linear-gradient(135deg, rgba(var(--color-gold-rgb),0.06), rgba(var(--color-gold-rgb),0.02));
-    border: 1px solid rgba(var(--color-gold-rgb),0.12);
+    background: linear-gradient(135deg, rgba(var(--color-fg-rgb),0.06), rgba(var(--color-fg-rgb),0.02));
+    border: 1px solid rgba(var(--color-fg-rgb),0.12);
     box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
     position: relative;
     z-index: 2;
@@ -85,7 +86,7 @@ h1, h2, h3, h4, .price-card .price {
 /* NAVEGAÇÃO */
 nav {
     background: rgba(0, 0, 0, 0.95);
-    border-bottom: 1px solid rgba(var(--color-gold-rgb), 0.25);
+    border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.25);
     padding: 20px;
     text-align: center;
     position: relative;
@@ -94,9 +95,11 @@ nav {
 }
 
 nav h1 {
-    color: var(--color-gold-light);
-    font-size: 28px;
-    margin-bottom: 10px;
+    color: var(--color-fg);
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 nav p {
@@ -117,18 +120,19 @@ nav p {
 .hero {
     text-align: center;
     padding: 60px 20px;
-    border: 1px solid rgba(var(--color-gold-rgb), 0.3);
+    border: 1px solid rgba(var(--color-fg-rgb), 0.3);
     border-radius: 10px;
     margin: 40px 0;
-    background: rgba(var(--color-gold-rgb), 0.05);
+    background: rgba(var(--color-fg-rgb), 0.05);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .hero h2 {
-    font-size: 36px;
-    color: var(--color-gold-light);
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--color-fg);
+    line-height: 1.05;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(var(--color-gold-light-rgb), 0.3);
 }
 
 .hero p {
@@ -139,8 +143,8 @@ nav p {
 
 /* BOTÕES */
 .button {
-    background: var(--color-gold);
-    color: #0a0a0a;
+    background: var(--color-accent);
+    color: var(--color-fg);
     font-weight: 600;
     padding: 15px 40px;
     border: none;
@@ -151,12 +155,12 @@ nav p {
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s;
-    box-shadow: 0 8px 24px rgba(var(--color-gold-rgb), 0.25);
+    box-shadow: 0 8px 24px rgba(var(--color-accent-rgb), 0.35);
 }
 
 .button:hover {
-    background: var(--color-gold-light);
-    box-shadow: 0 8px 30px rgba(var(--color-gold-light-rgb), 0.45);
+    background: var(--color-accent-light);
+    box-shadow: 0 8px 30px rgba(var(--color-accent-rgb), 0.55);
     transform: translateY(-3px);
 }
 
@@ -164,14 +168,14 @@ nav p {
 .section {
     margin: 40px 0;
     padding: 30px;
-    background: rgba(var(--color-gold-rgb), 0.02);
+    background: rgba(var(--color-fg-rgb), 0.02);
 }
 
 .section h3 {
-    color: var(--color-gold-light);
-    font-size: 24px;
+    color: var(--color-fg);
+    font-size: 34px;
+    font-weight: 700;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(var(--color-gold-light-rgb), 0.3);
 }
 
 .section p {
@@ -190,7 +194,7 @@ nav p {
 
 .service-card {
     background: #050505;
-    border: 1px solid rgba(var(--color-gold-rgb), 0.25);
+    border: 1px solid rgba(var(--color-fg-rgb), 0.25);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -198,14 +202,15 @@ nav p {
 }
 
 .service-card:hover {
-    border-color: rgba(var(--color-gold-rgb), 0.6);
+    border-color: rgba(var(--color-fg-rgb), 0.6);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     transform: translateY(-5px);
 }
 
 .service-card h4 {
-    color: var(--color-gold-light);
-    font-size: 18px;
+    color: var(--color-fg);
+    font-size: 24px;
+    font-weight: 700;
     margin-bottom: 15px;
 }
 
@@ -224,7 +229,7 @@ nav p {
 
 .price-card {
     background: #050505;
-    border: 1px solid rgba(var(--color-gold-rgb), 0.3);
+    border: 1px solid rgba(var(--color-fg-rgb), 0.3);
     padding: 30px;
     border-radius: 10px;
     text-align: center;
@@ -232,17 +237,17 @@ nav p {
 }
 
 .price-card h4 {
-    color: var(--color-gold-light);
-    font-size: 22px;
+    color: var(--color-fg);
+    font-size: 28px;
+    font-weight: 700;
     margin-bottom: 15px;
 }
 
 .price-card .price {
-    color: var(--color-gold-light);
-    font-size: 36px;
+    color: var(--color-fg);
+    font-size: 44px;
     font-weight: bold;
     margin: 20px 0;
-    text-shadow: 0 0 10px rgba(var(--color-gold-light-rgb), 0.3);
 }
 
 .price-card ul {
@@ -259,15 +264,15 @@ nav p {
 
 .price-card li:before {
     content: "✓ ";
-    color: var(--color-gold-light);
+    color: var(--color-fg);
     font-weight: bold;
     margin-right: 10px;
 }
 
 /* CONTATO */
 .contact {
-    background: rgba(var(--color-gold-rgb), 0.08);
-    border: 1px solid rgba(var(--color-gold-rgb), 0.3);
+    background: rgba(var(--color-fg-rgb), 0.08);
+    border: 1px solid rgba(var(--color-fg-rgb), 0.3);
     padding: 40px;
     border-radius: 10px;
     text-align: center;
@@ -276,8 +281,9 @@ nav p {
 }
 
 .contact h3 {
-    color: var(--color-gold-light);
-    font-size: 28px;
+    color: var(--color-fg);
+    font-size: 40px;
+    font-weight: 700;
     margin-bottom: 20px;
 }
 
@@ -289,14 +295,14 @@ nav p {
 
 .contact-info {
     font-size: 20px;
-    color: var(--color-gold-light);
+    color: var(--color-fg);
     margin: 15px 0;
 }
 
 /* FOOTER */
 footer {
     background: #000;
-    border-top: 1px solid rgba(var(--color-gold-rgb), 0.25);
+    border-top: 1px solid rgba(var(--color-fg-rgb), 0.25);
     padding: 30px;
     text-align: center;
     color: #999;
@@ -320,7 +326,7 @@ footer p {
     }
 
     .hero h2 {
-        font-size: 30px;
+        font-size: 48px;
     }
 
     .services,
@@ -346,7 +352,7 @@ footer p {
     }
 
     .hero h2 {
-        font-size: 24px;
+        font-size: 40px;
     }
 
     .hero p {
@@ -359,11 +365,11 @@ footer p {
     }
 
     .section h3 {
-        font-size: 18px;
+        font-size: 28px;
     }
 
     nav h1 {
-        font-size: 20px;
+        font-size: 32px;
     }
 
     .services,
@@ -399,18 +405,18 @@ footer p {
     }
 
     nav h1 {
-        font-size: 18px;
+        font-size: 28px;
     }
 
     .hero h2 {
-        font-size: 20px;
+        font-size: 32px;
     }
 
     .section h3 {
-        font-size: 16px;
+        font-size: 24px;
     }
 
     .price-card .price {
-        font-size: 28px;
+        font-size: 34px;
     }
 }

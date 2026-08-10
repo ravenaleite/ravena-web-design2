@@ -2,7 +2,7 @@
 const canvas = document.getElementById('canvas3d');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-let scene, camera, renderer, raven, ravenMat, wingLeft, wingRight, particles, key, rim;
+let scene, camera, renderer, gem, gemMat, gemCore, particles, key, rim;
 
 try {
     scene = new THREE.Scene();
@@ -13,64 +13,26 @@ try {
 
     camera.position.set(0, 0, 6);
 
-    // Objeto principal: corvo estilizado low-poly (referência ao nome Ravena),
-    // em bronze/dourado metálico sobre preto — assinatura visual da marca.
-    ravenMat = new THREE.MeshPhysicalMaterial({
-        color: 0x3a2d10,
-        metalness: 0.88,
-        roughness: 0.22,
-        clearcoat: 0.8,
-        clearcoatRoughness: 0.15,
-        reflectivity: 0.8,
-        emissive: 0x1a1206,
+    // Objeto principal: gema facetada (lapidação tipo brilhante), em tom
+    // creme/pérola metálico sobre preto — paleta minimalista, um só acento vermelho.
+    gemMat = new THREE.MeshPhysicalMaterial({
+        color: 0xd9d2c2,
+        metalness: 0.6,
+        roughness: 0.08,
+        clearcoat: 1,
+        clearcoatRoughness: 0.04,
+        reflectivity: 1,
+        transmission: 0.15,
+        emissive: 0x1a1712,
         flatShading: true,
     });
-    const eyeMat = new THREE.MeshBasicMaterial({ color: 0xffd873 });
+    gem = new THREE.Mesh(new THREE.IcosahedronGeometry(1.35, 0), gemMat);
+    scene.add(gem);
 
-    raven = new THREE.Group();
-
-    const body = new THREE.Mesh(new THREE.IcosahedronGeometry(0.9, 1), ravenMat);
-    body.scale.set(0.68, 0.55, 1.35);
-    raven.add(body);
-
-    const head = new THREE.Mesh(new THREE.IcosahedronGeometry(0.46, 1), ravenMat);
-    head.position.set(0, 0.32, 1.15);
-    raven.add(head);
-
-    const beak = new THREE.Mesh(new THREE.ConeGeometry(0.13, 0.55, 4), ravenMat);
-    beak.rotation.x = Math.PI / 2;
-    beak.rotation.y = Math.PI / 4;
-    beak.position.set(0, 0.24, 1.58);
-    raven.add(beak);
-
-    const eyeGeo = new THREE.SphereGeometry(0.06, 8, 8);
-    const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
-    eyeL.position.set(-0.22, 0.4, 1.35);
-    raven.add(eyeL);
-    const eyeR = new THREE.Mesh(eyeGeo, eyeMat);
-    eyeR.position.set(0.22, 0.4, 1.35);
-    raven.add(eyeR);
-
-    const tail = new THREE.Mesh(new THREE.ConeGeometry(0.55, 1.2, 4), ravenMat);
-    tail.scale.set(1, 1, 0.18);
-    tail.rotation.x = Math.PI / 2;
-    tail.rotation.z = Math.PI / 4;
-    tail.position.set(0, -0.02, -1.15);
-    raven.add(tail);
-
-    function makeWing(side) {
-        const wing = new THREE.Mesh(new THREE.ConeGeometry(0.85, 1.7, 3), ravenMat);
-        wing.scale.set(1, 1, 0.16);
-        wing.rotation.z = side * (Math.PI / 2 - 0.35);
-        wing.rotation.y = -side * 0.25;
-        wing.position.set(side * 0.55, 0.05, 0.05);
-        raven.add(wing);
-        return wing;
-    }
-    wingLeft = makeWing(1);
-    wingRight = makeWing(-1);
-
-    scene.add(raven);
+    // Núcleo interno luminoso vermelho, visível entre as facetas (acento único da marca)
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0xe8402c, transparent: true, opacity: 0.35 });
+    gemCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55, 0), coreMat);
+    scene.add(gemCore);
 
     // Partículas sutis
     const particlesGeo = new THREE.BufferGeometry();
@@ -89,13 +51,13 @@ try {
     particles = new THREE.Points(particlesGeo, particlesMat);
     scene.add(particles);
 
-    // Iluminação sofisticada (tons dourados/âmbar)
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x241f14, 0.6);
+    // Iluminação sofisticada (branco-creme neutro, com leve toque vermelho no contorno)
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x1c1a16, 0.6);
     scene.add(hemi);
-    key = new THREE.PointLight(0xe0b84b, 1.2, 12);
+    key = new THREE.PointLight(0xf2ede1, 1.2, 12);
     key.position.set(4, 2, 6);
     scene.add(key);
-    rim = new THREE.DirectionalLight(0x8a6d1f, 0.6);
+    rim = new THREE.DirectionalLight(0xe8402c, 0.4);
     rim.position.set(-5, -2, 5);
     scene.add(rim);
 } catch (err) {
@@ -134,11 +96,10 @@ if (renderer) {
         if (e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
     }, { passive: true });
 
-    // Toque/clique no corvo: as asas abrem, a câmera aproxima e a luz pulsa
+    // Toque/clique na gema: destaque vermelho, câmera aproxima, giro acelera
     const sceneCard = document.getElementById('sceneCard');
-    const baseEmissive = new THREE.Color(0x1a1206);
-    const burstEmissive = new THREE.Color(0xffcf6b);
-    const wingRestZ = { left: wingLeft.rotation.z, right: wingRight.rotation.z };
+    const baseEmissive = new THREE.Color(0x1a1712);
+    const burstEmissive = new THREE.Color(0xff6647);
     let burst = 0;
     function triggerBurst() {
         burst = 1;
@@ -152,46 +113,41 @@ if (renderer) {
         }, { passive: false });
     }
 
-    if (reduceMotion) {
-        // Respeita a preferência do usuário por menos movimento: uma única renderização estática
-        renderer.render(scene, camera);
-    } else {
-        // Animação: balanço sutil (sem giro contínuo) + reação ao toque/clique
-        let last = performance.now();
-        function animate() {
-            const now = performance.now();
-            const dt = (now - last) * 0.001;
-            last = now;
+    // Animação: giro contínuo e visível, sempre ativo (mais lento se o
+    // usuário pedir menos movimento no sistema, mas nunca parado) + reação ao toque/clique
+    const spinSpeed = reduceMotion ? 0.15 : 0.4;
+    let last = performance.now();
+    function animate() {
+        const now = performance.now();
+        const dt = (now - last) * 0.001;
+        last = now;
 
-            if (burst > 0) {
-                burst = Math.max(0, burst - dt / 1.1);
-            }
-            const ease = burst * burst * (3 - 2 * burst); // smoothstep
-
-            // o corvo balança devagar, como se observasse ao redor, com influência do mouse/toque
-            const idleYaw = Math.sin(now * 0.00018) * 0.22;
-            const idleBob = Math.sin(now * 0.0011) * 0.08;
-            const targetY = idleYaw + mouseX * 0.0001;
-            const targetX = mouseY * 0.00006;
-            raven.rotation.y += (targetY - raven.rotation.y) * 0.05;
-            raven.rotation.x += (targetX - raven.rotation.x) * 0.05;
-            raven.position.y += (idleBob - raven.position.y) * 0.05;
-
-            // asas abrem durante o destaque de toque/clique
-            wingLeft.rotation.z = wingRestZ.left - ease * 0.6;
-            wingRight.rotation.z = wingRestZ.right + ease * 0.6;
-
-            // partículas giram lentamente
-            particles.rotation.y += 0.002 + ease * 0.01;
-
-            // câmera se aproxima e a luz pulsa durante o destaque
-            camera.position.z = 6 - ease * 1.4;
-            key.intensity = 1.2 + ease * 2.2;
-            ravenMat.emissive.copy(baseEmissive).lerp(burstEmissive, ease);
-
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
+        if (burst > 0) {
+            burst = Math.max(0, burst - dt / 1.1);
         }
+        const ease = burst * burst * (3 - 2 * burst); // smoothstep
+
+        // giro contínuo da gema, com leve inclinação seguindo o mouse/toque
+        gem.rotation.y += (spinSpeed + ease * 1.2) * dt;
+        gem.rotation.x += (0.12 + ease * 0.6) * dt;
+        const tiltZ = reduceMotion ? 0 : mouseX * 0.00025;
+        const tiltX = reduceMotion ? 0 : mouseY * 0.00015;
+        gem.rotation.z += (tiltZ - gem.rotation.z) * 0.05;
+        camera.position.x += (tiltX * 2 - camera.position.x) * 0.05;
+
+        gemCore.rotation.y -= (spinSpeed * 1.6) * dt;
+        gemCore.rotation.x += (spinSpeed * 0.8) * dt;
+
+        // partículas giram lentamente
+        particles.rotation.y += 0.002 + ease * 0.01;
+
+        // câmera se aproxima e a luz pulsa durante o destaque
+        camera.position.z = 6 - ease * 1.4;
+        key.intensity = 1.2 + ease * 2.2;
+        gemMat.emissive.copy(baseEmissive).lerp(burstEmissive, ease);
+
+        renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
+    requestAnimationFrame(animate);
 }
