@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorriso Claro Odontologia | Salgueiro-PE e Mauriti-CE</title>
+<meta name="description" content="Clínica odontológica com unidades em Salgueiro-PE e Mauriti-CE. Limpeza, clareamento, ortodontia e urgência. Agende sua avaliação.">
+
+<!-- Projeto demonstrativo: fora do índice do Google para não ser confundido com negócio real -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Pré-visualização ao compartilhar o link no WhatsApp e redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Sorriso Claro Odontologia | Salgueiro-PE e Mauriti-CE">
+<meta property="og:description" content="Avaliação gratuita, orçamento fechado e urgência no mesmo dia.">
+<meta property="og:url" content="https://ravena-web-design-oficial.netlify.app/demos/clinica-sorriso-claro.html">
+<meta property="og:image" content="https://ravena-web-design-oficial.netlify.app/demos/og-clinica.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sorriso Claro Odontologia | Salgueiro-PE e Mauriti-CE">
+<meta name="twitter:image" content="https://ravena-web-design-oficial.netlify.app/demos/og-clinica.png">
+<link rel="canonical" href="https://ravena-web-design-oficial.netlify.app/demos/clinica-sorriso-claro.html">
+<meta name="theme-color" content="#0e7c86">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --branco:#ffffff; --gelo:#f4f9fa; --teal:#0e7c86; --teal-escuro:#0a5d65;
+    --teal-rgb:14,124,134; --marinho:#12303a; --suave:#5d7480; --linha:#dfe9ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--branco);color:var(--marinho);font-family:'Source Sans 3',sans-serif;line-height:1.68;-webkit-tap-highlight-color:transparent}
+  h1,h2,h3{font-weight:700;line-height:1.2}
+  .container{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  .aviso{background:var(--marinho);color:#dceef1;text-align:center;padding:9px 16px;font-size:13px;font-weight:600}
+
+  header{background:var(--branco);border-bottom:1px solid var(--linha);position:sticky;top:0;z-index:20}
+  .barra{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 20px;max-width:1080px;margin:0 auto}
+  .logo{font-size:21px;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:8px}
+  nav a{margin-left:20px;font-size:15px;color:var(--suave);text-decoration:none}
+  nav a:hover{color:var(--teal)}
+  @media(max-width:700px){nav{display:none}}
+
+  .hero{background:linear-gradient(180deg,var(--gelo),var(--branco));padding:70px 0 64px}
+  .hero-grade{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  @media(max-width:780px){.hero-grade{grid-template-columns:1fr}}
+  .tag{display:inline-block;background:rgba(var(--teal-rgb),.1);color:var(--teal-escuro);border-radius:30px;padding:6px 15px;font-size:13.5px;font-weight:700;margin-bottom:16px}
+  .hero h1{font-size:clamp(32px,5.4vw,50px);margin-bottom:14px}
+  .hero h1 em{color:var(--teal);font-style:normal}
+  .hero p{color:var(--suave);font-size:18px;margin-bottom:26px;max-width:48ch}
+
+  .btn{display:inline-block;background:var(--teal);color:#fff;font-weight:700;font-size:17px;padding:14px 30px;border-radius:8px;text-decoration:none;transition:.25s;box-shadow:0 8px 20px rgba(var(--teal-rgb),.25)}
+  .btn:hover{background:var(--teal-escuro);transform:translateY(-2px)}
+  .btn-claro{background:#fff;color:var(--teal);border:1px solid var(--linha);box-shadow:none;margin-left:8px}
+  .btn-claro:hover{background:var(--gelo);color:var(--teal-escuro)}
+
+  .destaque{background:var(--branco);border:1px solid var(--linha);border-radius:16px;padding:28px;box-shadow:0 16px 40px rgba(18,48,58,.08)}
+  .destaque h2{color:var(--teal);font-size:19px;margin-bottom:14px}
+  .destaque li{list-style:none;padding:9px 0 9px 28px;position:relative;color:var(--suave);border-bottom:1px solid var(--linha)}
+  .destaque li:last-child{border-bottom:none}
+  .destaque li::before{content:"✓";position:absolute;left:0;top:9px;color:var(--teal);font-weight:700}
+
+  section{padding:60px 0}
+  .gelo{background:var(--gelo)}
+  .titulo{font-size:30px;margin-bottom:6px;text-align:center}
+  .sub{color:var(--suave);margin-bottom:34px;text-align:center}
+
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px}
+  .card{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:24px;transition:.25s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(18,48,58,.1);border-color:rgba(var(--teal-rgb),.4)}
+  .icone{width:42px;height:42px;border-radius:10px;background:rgba(var(--teal-rgb),.1);display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:12px}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{color:var(--suave);font-size:15px}
+
+  .unidades{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:700px){.unidades{grid-template-columns:1fr}}
+  .unidade{background:var(--branco);border:1px solid var(--linha);border-left:4px solid var(--teal);border-radius:0 14px 14px 0;padding:24px}
+  .unidade h3{font-size:19px;color:var(--teal);margin-bottom:8px}
+  .unidade p{color:var(--suave);font-size:15px;margin-bottom:4px}
+
+  .fechamento{background:var(--teal);color:#fff;text-align:center;padding:56px 0}
+  .fechamento h2{font-size:30px;margin-bottom:10px}
+  .fechamento p{opacity:.92;margin-bottom:24px}
+  .fechamento .btn{background:#fff;color:var(--teal-escuro);box-shadow:none}
+  .fechamento .btn:hover{background:var(--gelo)}
+
+  footer{background:var(--marinho);color:#a8c2cb;padding:30px 20px;text-align:center;font-size:14px}
+  .assinatura{margin-top:8px}
+  footer b{color:#fff}
+
+  .zap{position:fixed;right:16px;bottom:16px;width:54px;height:54px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(var(--teal-rgb),.45);z-index:40;transition:transform .25s}
+  .zap:hover{transform:scale(1.08)}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "Sorriso Claro Odontologia",
+  "description": "Clínica odontológica com unidades em Salgueiro-PE e Mauriti-CE.",
+  "telephone": "+5587991614428",
+  "priceRange": "$$",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Boa Vista, 512 - Centro",
+      "addressLocality": "Salgueiro",
+      "addressRegion": "PE",
+      "addressCountry": "BR"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Marechal Floriano, 716 - Centro",
+      "addressLocality": "Mauriti",
+      "addressRegion": "CE",
+      "addressCountry": "BR"
+    }
+  ],
+  "openingHours": [
+    "Mo-Fr 08:00-18:00"
+  ]
+}
+</script>
+</head>
+<body>
+
+<p class="aviso">Projeto demonstrativo — negócio fictício, criado por Ravena Leite para mostrar o trabalho.</p>
+
+<header>
+  <div class="barra">
+    <span class="logo">🦷 Sorriso Claro</span>
+    <nav>
+      <a href="#tratamentos">Tratamentos</a>
+      <a href="#unidades">Unidades</a>
+      <a href="#agendar">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="container hero-grade">
+    <div>
+      <span class="tag">Salgueiro-PE · Mauriti-CE</span>
+      <h1>Cuidar do sorriso<br><em>sem medo e sem pressa.</em></h1>
+      <p>Atendimento humanizado, com explicação de cada etapa antes de começar. Primeira avaliação sem compromisso nas duas unidades.</p>
+      <a href="#agendar" class="btn">Agendar avaliação</a>
+      <a href="#tratamentos" class="btn btn-claro">Ver tratamentos</a>
+    </div>
+    <div class="destaque">
+      <h2>Por que as pessoas voltam</h2>
+      <ul>
+        <li>Orçamento fechado antes de iniciar</li>
+        <li>Parcelamento em até 10x sem juros</li>
+        <li>Urgência atendida no mesmo dia</li>
+        <li>Duas unidades, um só prontuário</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="tratamentos">
+  <div class="container">
+    <h2 class="titulo">Tratamentos</h2>
+    <p class="sub">Do básico ao estético, no mesmo lugar.</p>
+    <div class="grade">
+      <div class="card"><div class="icone">🪥</div><h3>Limpeza e prevenção</h3><p>Profilaxia, aplicação de flúor e orientação de higiene.</p></div>
+      <div class="card"><div class="icone">✨</div><h3>Clareamento</h3><p>Consultório ou caseiro supervisionado, com acompanhamento.</p></div>
+      <div class="card"><div class="icone">📐</div><h3>Ortodontia</h3><p>Aparelho fixo e alinhador transparente, com plano definido.</p></div>
+      <div class="card"><div class="icone">🩹</div><h3>Restauração</h3><p>Resina da cor do dente, em sessão única na maioria dos casos.</p></div>
+      <div class="card"><div class="icone">🦷</div><h3>Prótese e implante</h3><p>Avaliação com raio-x e planejamento antes de qualquer decisão.</p></div>
+      <div class="card"><div class="icone">🚨</div><h3>Urgência</h3><p>Dor de dente atendida no mesmo dia, com encaixe na agenda.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gelo" id="unidades">
+  <div class="container">
+    <h2 class="titulo">Nossas unidades</h2>
+    <p class="sub">Mesmo cuidado nas duas cidades.</p>
+    <div class="unidades">
+      <div class="unidade">
+        <h3>Salgueiro · PE</h3>
+        <p>Av. Boa Vista, 512 — Centro</p>
+        <p>Segunda a sexta, 08h às 18h</p>
+        <p>Sábado, 08h às 12h</p>
+      </div>
+      <div class="unidade">
+        <h3>Mauriti · CE</h3>
+        <p>Rua Marechal Floriano, 716 — Centro</p>
+        <p>Segunda a sexta, 08h às 17h</p>
+        <p>Sábado, sob agendamento</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="fechamento" id="agendar">
+  <div class="container">
+    <h2>Sua avaliação é gratuita</h2>
+    <p>Escolha a unidade mais perto e marque pelo WhatsApp. Respondemos em minutos.</p>
+    <a href="https://wa.me/5587991614428" class="btn">Agendar pelo WhatsApp</a>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p>Sorriso Claro Odontologia · Salgueiro-PE e Mauriti-CE · (87) 99161-4428</p>
+  <p class="assinatura">Projeto demonstrativo criado por <b>Ravena Web Design</b></p>
+</footer>
+
+<a class="zap" href="https://wa.me/5587991614428" aria-label="Agendar pelo WhatsApp">
+  <svg viewBox="0 0 24 24" width="27" height="27" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.5 2 2 6.5 2 12.04c0 1.77.46 3.5 1.34 5.03L2 22.06l5.14-1.35a10 10 0 0 0 4.9 1.27c5.54 0 10.04-4.5 10.04-10.04C22.08 6.5 17.58 2 12.04 2zm5.85 15.89c-.25.7-1.47 1.37-2.02 1.45-.52.08-1.17.11-1.89-.12-.43-.14-.99-.33-1.71-.63-3.01-1.3-4.97-4.33-5.12-4.53-.15-.2-1.23-1.63-1.23-3.11 0-1.48.78-2.21 1.05-2.51.28-.3.61-.38.81-.38h.58c.19 0 .44-.07.69.53.25.6.86 2.09.94 2.24.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.3.77 1.27 1.66 2.06 1.14 1.01 2.1 1.32 2.4 1.47.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.08.13.08.72-.17 1.42z"/></svg>
+</a>
+
+</body>
+</html>

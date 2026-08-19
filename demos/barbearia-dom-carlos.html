@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbearia Dom Carlos | Corte e Barba em Salgueiro-PE</title>
+<meta name="description" content="Barbearia tradicional em Salgueiro-PE. Corte, barba e navalha com hora marcada. Agende pelo WhatsApp.">
+
+<!-- Projeto demonstrativo: fora do índice do Google para não ser confundido com negócio real -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Pré-visualização ao compartilhar o link no WhatsApp e redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Barbearia Dom Carlos | Salgueiro-PE">
+<meta property="og:description" content="Corte, barba e navalha com hora marcada. Agende pelo WhatsApp.">
+<meta property="og:url" content="https://ravena-web-design-oficial.netlify.app/demos/barbearia-dom-carlos.html">
+<meta property="og:image" content="https://ravena-web-design-oficial.netlify.app/demos/og-barbearia.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Barbearia Dom Carlos | Salgueiro-PE">
+<meta name="twitter:image" content="https://ravena-web-design-oficial.netlify.app/demos/og-barbearia.png">
+<link rel="canonical" href="https://ravena-web-design-oficial.netlify.app/demos/barbearia-dom-carlos.html">
+<meta name="theme-color" content="#0f0d0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f0d0a; --surface:#171410; --gold:#c8963e; --gold-claro:#e0b055;
+    --gold-rgb:200,150,62; --texto:#f3efe7; --suave:#a89f8f; --linha:rgba(200,150,62,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--texto);font-family:'Inter',sans-serif;line-height:1.65;-webkit-tap-highlight-color:transparent}
+  h1,h2,h3{font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+  .container{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  .aviso{background:var(--gold);color:#231a08;text-align:center;padding:9px 16px;font-size:13px;font-weight:600}
+
+  header{border-bottom:1px solid var(--linha);background:rgba(15,13,10,.92);position:sticky;top:0;z-index:20;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .barra{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;max-width:1080px;margin:0 auto}
+  .logo{font-family:'Oswald',sans-serif;font-size:23px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+  nav a{margin-left:22px;font-size:14px;color:var(--suave);text-decoration:none}
+  nav a:hover{color:var(--gold-claro)}
+  @media(max-width:640px){nav{display:none}}
+
+  .hero{padding:88px 0 76px;text-align:center;background:
+    radial-gradient(760px 320px at 50% -40px, rgba(var(--gold-rgb),.16), transparent 70%)}
+  .selo{display:inline-block;border:1px solid var(--linha);color:var(--gold);border-radius:40px;padding:6px 16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+  .hero h1{font-size:clamp(38px,7vw,68px);line-height:1.04;margin-bottom:16px}
+  .hero h1 span{color:var(--gold)}
+  .hero p{color:var(--suave);font-size:18px;max-width:52ch;margin:0 auto 30px}
+
+  .btn{display:inline-block;background:var(--gold);color:#231a08;font-weight:700;font-size:17px;padding:15px 34px;border-radius:6px;text-decoration:none;transition:.25s}
+  .btn:hover{background:var(--gold-claro);transform:translateY(-2px)}
+  .btn-vazado{background:transparent;color:var(--gold);border:1px solid var(--gold);margin-left:10px}
+  .btn-vazado:hover{background:rgba(var(--gold-rgb),.12);color:var(--gold-claro)}
+
+  section{padding:64px 0;border-top:1px solid rgba(255,255,255,.05)}
+  .titulo{font-size:30px;margin-bottom:8px}
+  .sub{color:var(--suave);margin-bottom:34px}
+
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .card{background:var(--surface);border:1px solid var(--linha);border-radius:10px;padding:24px;transition:.25s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(var(--gold-rgb),.55)}
+  .card h3{font-size:20px;color:var(--gold);margin-bottom:8px}
+  .card p{color:var(--suave);font-size:14.5px}
+
+  .preco-linha{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:15px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+  .preco-linha strong{font-family:'Oswald',sans-serif;font-size:22px;color:var(--gold);white-space:nowrap}
+  .preco-linha span{color:var(--suave);font-size:14px;display:block}
+
+  .horarios{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+  .horarios div{background:var(--surface);border-left:3px solid var(--gold);padding:14px 18px;border-radius:0 8px 8px 0}
+  .horarios b{display:block;font-size:14px}
+  .horarios span{color:var(--suave);font-size:14px}
+
+  .fechamento{text-align:center;background:linear-gradient(180deg,rgba(var(--gold-rgb),.10),transparent)}
+  .fechamento h2{font-size:32px;margin-bottom:12px}
+  .fechamento p{color:var(--suave);margin-bottom:26px}
+
+  footer{border-top:1px solid var(--linha);padding:30px 20px;text-align:center;color:var(--suave);font-size:14px}
+  .assinatura{margin-top:8px}
+  footer b{color:var(--gold)}
+
+  .zap{position:fixed;right:16px;bottom:16px;width:54px;height:54px;border-radius:50%;background:var(--gold);color:#231a08;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(var(--gold-rgb),.45);z-index:40;transition:transform .25s}
+  .zap:hover{transform:scale(1.08)}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Barbearia Dom Carlos",
+  "description": "Barbearia tradicional em Salgueiro-PE. Corte, barba e navalha com hora marcada.",
+  "telephone": "+5587991614428",
+  "priceRange": "R$ 15 - R$ 55",
+  "areaServed": "Salgueiro, PE",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua do Comércio, 240 - Centro",
+    "addressLocality": "Salgueiro",
+    "addressRegion": "PE",
+    "addressCountry": "BR"
+  },
+  "openingHours": [
+    "Tu-Fr 08:00-19:00",
+    "Sa 07:00-17:00"
+  ]
+}
+</script>
+</head>
+<body>
+
+<p class="aviso">Projeto demonstrativo — negócio fictício, criado por Ravena Leite para mostrar o trabalho.</p>
+
+<header>
+  <div class="barra">
+    <span class="logo">Dom Carlos</span>
+    <nav>
+      <a href="#servicos">Serviços</a>
+      <a href="#precos">Preços</a>
+      <a href="#horarios">Horários</a>
+      <a href="#agendar">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="container">
+    <span class="selo">Desde 1998 · Salgueiro-PE</span>
+    <h1>Corte de <span>respeito</span><br>na cadeira certa</h1>
+    <p>Barbearia tradicional, com hora marcada e sem espera. Navalha, toalha quente e o corte do jeito que você pediu.</p>
+    <a href="#agendar" class="btn">Agendar horário</a>
+    <a href="#precos" class="btn btn-vazado">Ver preços</a>
+  </div>
+</div>
+
+<section id="servicos">
+  <div class="container">
+    <h2 class="titulo">O que fazemos</h2>
+    <p class="sub">Serviço completo, do clássico ao moderno.</p>
+    <div class="grade">
+      <div class="card"><h3>Corte clássico</h3><p>Tesoura e máquina, acabamento na navalha e finalização com pomada.</p></div>
+      <div class="card"><h3>Barba na toalha</h3><p>Toalha quente, óleo, navalha e bálsamo. O ritual completo.</p></div>
+      <div class="card"><h3>Corte infantil</h3><p>Paciência com os pequenos e cadeirinha própria. Sem drama.</p></div>
+      <div class="card"><h3>Pezinho e sobrancelha</h3><p>Manutenção rápida entre um corte e outro, sem hora marcada.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="precos">
+  <div class="container">
+    <h2 class="titulo">Preços</h2>
+    <p class="sub">Sem surpresa na hora de pagar.</p>
+    <div class="preco-linha"><div>Corte clássico<span>Inclui lavagem e finalização</span></div><strong>R$ 35</strong></div>
+    <div class="preco-linha"><div>Barba na toalha<span>Toalha quente e navalha</span></div><strong>R$ 30</strong></div>
+    <div class="preco-linha"><div>Corte + barba<span>O combo mais pedido</span></div><strong>R$ 55</strong></div>
+    <div class="preco-linha"><div>Corte infantil<span>Até 10 anos</span></div><strong>R$ 25</strong></div>
+    <div class="preco-linha"><div>Pezinho<span>Manutenção rápida</span></div><strong>R$ 15</strong></div>
+  </div>
+</section>
+
+<section id="horarios">
+  <div class="container">
+    <h2 class="titulo">Onde e quando</h2>
+    <p class="sub">Rua do Comércio, 240 — Centro, Salgueiro-PE</p>
+    <div class="horarios">
+      <div><b>Terça a sexta</b><span>08h às 19h</span></div>
+      <div><b>Sábado</b><span>07h às 17h</span></div>
+      <div><b>Domingo e segunda</b><span>Fechado</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="fechamento" id="agendar">
+  <div class="container">
+    <h2>Bora marcar?</h2>
+    <p>Manda mensagem que a gente confirma o horário na hora.</p>
+    <a href="https://wa.me/5587991614428" class="btn">Chamar no WhatsApp</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Barbearia Dom Carlos · Salgueiro-PE · (87) 99161-4428</p>
+  <p class="assinatura">Projeto demonstrativo criado por <b>Ravena Web Design</b></p>
+</footer>
+
+<a class="zap" href="https://wa.me/5587991614428" aria-label="Chamar no WhatsApp">
+  <svg viewBox="0 0 24 24" width="27" height="27" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.5 2 2 6.5 2 12.04c0 1.77.46 3.5 1.34 5.03L2 22.06l5.14-1.35a10 10 0 0 0 4.9 1.27c5.54 0 10.04-4.5 10.04-10.04C22.08 6.5 17.58 2 12.04 2zm5.85 15.89c-.25.7-1.47 1.37-2.02 1.45-.52.08-1.17.11-1.89-.12-.43-.14-.99-.33-1.71-.63-3.01-1.3-4.97-4.33-5.12-4.53-.15-.2-1.23-1.63-1.23-3.11 0-1.48.78-2.21 1.05-2.51.28-.3.61-.38.81-.38h.58c.19 0 .44-.07.69.53.25.6.86 2.09.94 2.24.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.3.77 1.27 1.66 2.06 1.14 1.01 2.1 1.32 2.4 1.47.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.08.13.08.72-.17 1.42z"/></svg>
+</a>
+
+</body>
+</html>

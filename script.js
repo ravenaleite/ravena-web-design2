@@ -1,75 +1,101 @@
-// Cena 3D elegante com interação por mouse/toque
+/* =============================================================================
+   Ravena Web Design — cena 3D e interface
+
+   A biblioteca Three.js pesa ~600 KB, doze vezes mais que este site inteiro, e
+   existe só para a gema girar. Por isso ela não vem no HTML: é baixada por este
+   script apenas quando o aparelho e a conexão comportam. Quem abre no celular
+   ou num sinal fraco recebe a página sem esse peso, e o layout se fecha sozinho
+   pela classe "sem-3d" (ver styles.css).
+   ========================================================================== */
+
 const canvas = document.getElementById('canvas3d');
+const sceneCard = document.getElementById('sceneCard');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+const THREE_SRI = 'sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu';
 
 let scene, camera, renderer, gem, gemMat, gemCore, particles, key, rim;
 
-try {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / 360, 0.1, 100);
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-
-    camera.position.set(0, 0, 6);
-
-    // Objeto principal: gema facetada (lapidação tipo brilhante), em tom
-    // creme/pérola metálico sobre preto — paleta minimalista, um só acento vermelho.
-    gemMat = new THREE.MeshPhysicalMaterial({
-        color: 0xd9d2c2,
-        metalness: 0.6,
-        roughness: 0.08,
-        clearcoat: 1,
-        clearcoatRoughness: 0.04,
-        reflectivity: 1,
-        transmission: 0.15,
-        emissive: 0x1a1712,
-        flatShading: true,
-    });
-    gem = new THREE.Mesh(new THREE.IcosahedronGeometry(1.35, 0), gemMat);
-    scene.add(gem);
-
-    // Núcleo interno luminoso vermelho, visível entre as facetas (acento único da marca)
-    const coreMat = new THREE.MeshBasicMaterial({ color: 0xe8402c, transparent: true, opacity: 0.35 });
-    gemCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55, 0), coreMat);
-    scene.add(gemCore);
-
-    // Partículas sutis
-    const particlesGeo = new THREE.BufferGeometry();
-    const count = 600;
-    const positions = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-        const phi = Math.acos((Math.random() * 2) - 1);
-        const theta = Math.random() * Math.PI * 2;
-        const r = 3.5 + Math.random() * 1.8;
-        positions[i * 3 + 0] = Math.sin(phi) * Math.cos(theta) * r;
-        positions[i * 3 + 1] = Math.sin(phi) * Math.sin(theta) * r * 0.6;
-        positions[i * 3 + 2] = Math.cos(phi) * r;
-    }
-    particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particlesMat = new THREE.PointsMaterial({ color: 0xcccccc, size: 0.02, transparent: true, opacity: 0.8 });
-    particles = new THREE.Points(particlesGeo, particlesMat);
-    scene.add(particles);
-
-    // Iluminação sofisticada (branco-creme neutro, com leve toque vermelho no contorno)
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x1c1a16, 0.6);
-    scene.add(hemi);
-    key = new THREE.PointLight(0xf2ede1, 1.2, 12);
-    key.position.set(4, 2, 6);
-    scene.add(key);
-    rim = new THREE.DirectionalLight(0xe8402c, 0.4);
-    rim.position.set(-5, -2, 5);
-    scene.add(rim);
-} catch (err) {
-    // Dispositivo sem suporte a WebGL: esconde a cena 3D sem quebrar o layout
-    console.warn('Cena 3D desativada (WebGL indisponível):', err);
-    canvas.style.display = 'none';
-    const overlay = document.querySelector('.canvas-overlay');
-    if (overlay) overlay.style.display = 'none';
+/* Sem cena: o cartão deixa de ser anunciado como botão, para o leitor de tela
+   não oferecer um controle que não faz nada. */
+function desativarCena() {
+    document.documentElement.classList.add('sem-3d');
+    if (!sceneCard) return;
+    sceneCard.removeAttribute('role');
+    sceneCard.removeAttribute('tabindex');
+    sceneCard.removeAttribute('aria-label');
+    sceneCard.setAttribute('aria-hidden', 'true');
 }
 
-if (renderer) {
-    // Responsividade e redimensionamento (breakpoints sincronizados com styles.css --hero-size)
+/* ---------------------------------------------------------------- montagem */
+function montarCena() {
+    try {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / 360, 0.1, 100);
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+        camera.position.set(0, 0, 6);
+
+        // Gema facetada em cristal ciano-metálico sobre azul profundo, com núcleo
+        // rosa-neon visível entre as facetas — o par de acentos da marca.
+        gemMat = new THREE.MeshPhysicalMaterial({
+            color: 0xbfe9ff,
+            metalness: 0.6,
+            roughness: 0.08,
+            clearcoat: 1,
+            clearcoatRoughness: 0.04,
+            reflectivity: 1,
+            transmission: 0.15,
+            emissive: 0x0a1a33,
+            flatShading: true,
+        });
+        gem = new THREE.Mesh(new THREE.IcosahedronGeometry(1.35, 0), gemMat);
+        scene.add(gem);
+
+        const coreMat = new THREE.MeshBasicMaterial({
+            color: 0xff0080, transparent: true, opacity: 0.35,
+        });
+        gemCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55, 0), coreMat);
+        scene.add(gemCore);
+
+        // Partículas sutis ao redor
+        const particlesGeo = new THREE.BufferGeometry();
+        const count = 600;
+        const positions = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+            const phi = Math.acos((Math.random() * 2) - 1);
+            const theta = Math.random() * Math.PI * 2;
+            const r = 3.5 + Math.random() * 1.8;
+            positions[i * 3 + 0] = Math.sin(phi) * Math.cos(theta) * r;
+            positions[i * 3 + 1] = Math.sin(phi) * Math.sin(theta) * r * 0.6;
+            positions[i * 3 + 2] = Math.cos(phi) * r;
+        }
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particles = new THREE.Points(particlesGeo, new THREE.PointsMaterial({
+            color: 0xaad4ff, size: 0.02, transparent: true, opacity: 0.8,
+        }));
+        scene.add(particles);
+
+        // Luz branco-azulada neutra, com leve contorno rosa-neon
+        scene.add(new THREE.HemisphereLight(0xffffff, 0x0d1330, 0.6));
+        key = new THREE.PointLight(0xcfe9ff, 1.2, 12);
+        key.position.set(4, 2, 6);
+        scene.add(key);
+        rim = new THREE.DirectionalLight(0xff0080, 0.4);
+        rim.position.set(-5, -2, 5);
+        scene.add(rim);
+
+        return true;
+    } catch (err) {
+        console.warn('Cena 3D desativada:', err);
+        return false;
+    }
+}
+
+/* ------------------------------------------------------------- interação */
+function iniciarCena() {
     function resize() {
         const w = window.innerWidth;
         let h;
@@ -85,7 +111,6 @@ if (renderer) {
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    // Interação por mouse e por toque (parallax suave, funciona em Android/iPhone/tablet)
     let mouseX = 0, mouseY = 0;
     function updatePointer(clientX, clientY) {
         mouseX = clientX - window.innerWidth / 2;
@@ -96,14 +121,12 @@ if (renderer) {
         if (e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
     }, { passive: true });
 
-    // Toque/clique na gema: destaque vermelho, câmera aproxima, giro acelera
-    const sceneCard = document.getElementById('sceneCard');
-    const baseEmissive = new THREE.Color(0x1a1712);
-    const burstEmissive = new THREE.Color(0xff6647);
+    // Destaque ao tocar, clicar ou apertar Enter/Espaço no cartão
+    const baseEmissive = new THREE.Color(0x0a1a33);
+    const burstEmissive = new THREE.Color(0x00ffff);
     let burst = 0;
-    function triggerBurst() {
-        burst = 1;
-    }
+    const triggerBurst = () => { burst = 1; ligarLoop(); };
+
     if (sceneCard) {
         sceneCard.addEventListener('click', triggerBurst);
         sceneCard.addEventListener('touchstart', (e) => {
@@ -111,23 +134,46 @@ if (renderer) {
             if (e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
             triggerBurst();
         }, { passive: false });
+        sceneCard.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                triggerBurst();
+            }
+        });
     }
 
-    // Animação: giro contínuo e visível, sempre ativo (mais lento se o
-    // usuário pedir menos movimento no sistema, mas nunca parado) + reação ao toque/clique
-    const spinSpeed = reduceMotion ? 0.15 : 0.4;
+    // O loop para quando a cena sai da tela: sem isso, 600 partículas
+    // continuariam sendo desenhadas enquanto a pessoa lê o rodapé.
+    let naTela = true;
+    let rodando = false;
     let last = performance.now();
+
+    function ligarLoop() {
+        if (rodando) return;
+        rodando = true;
+        last = performance.now();
+        requestAnimationFrame(animate);
+    }
+
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver((entradas) => {
+            naTela = entradas[0].isIntersecting;
+            if (naTela) ligarLoop();
+        }, { threshold: 0 }).observe(canvas);
+    }
+
+    const spinSpeed = reduceMotion ? 0.15 : 0.4;
+
     function animate() {
+        if (!naTela) { rodando = false; return; }
+
         const now = performance.now();
         const dt = (now - last) * 0.001;
         last = now;
 
-        if (burst > 0) {
-            burst = Math.max(0, burst - dt / 1.1);
-        }
+        if (burst > 0) burst = Math.max(0, burst - dt / 1.1);
         const ease = burst * burst * (3 - 2 * burst); // smoothstep
 
-        // giro contínuo da gema, com leve inclinação seguindo o mouse/toque
         gem.rotation.y += (spinSpeed + ease * 1.2) * dt;
         gem.rotation.x += (0.12 + ease * 0.6) * dt;
         const tiltZ = reduceMotion ? 0 : mouseX * 0.00025;
@@ -138,10 +184,8 @@ if (renderer) {
         gemCore.rotation.y -= (spinSpeed * 1.6) * dt;
         gemCore.rotation.x += (spinSpeed * 0.8) * dt;
 
-        // partículas giram lentamente
         particles.rotation.y += 0.002 + ease * 0.01;
 
-        // câmera se aproxima e a luz pulsa durante o destaque
         camera.position.z = 6 - ease * 1.4;
         key.intensity = 1.2 + ease * 2.2;
         gemMat.emissive.copy(baseEmissive).lerp(burstEmissive, ease);
@@ -149,5 +193,65 @@ if (renderer) {
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
-    requestAnimationFrame(animate);
+
+    ligarLoop();
 }
+
+/* ------------------------------------------------------- carga condicional */
+if (canvas && !document.documentElement.classList.contains('sem-3d')) {
+    const s = document.createElement('script');
+    s.src = THREE_URL;
+    s.integrity = THREE_SRI;
+    s.crossOrigin = 'anonymous';
+    s.referrerPolicy = 'no-referrer';
+    s.onload = () => {
+        if (typeof THREE === 'undefined' || !montarCena()) desativarCena();
+        else iniciarCena();
+    };
+    // CDN fora do ar, bloqueado pela rede ou hash inválido: a página segue inteira.
+    s.onerror = desativarCena;
+    document.head.appendChild(s);
+} else {
+    desativarCena();
+}
+
+
+/* =============================================================================
+   INTERFACE — independente da cena 3D. Roda em qualquer aparelho.
+   ========================================================================== */
+
+(function interfaceDoSite() {
+    'use strict';
+
+    const menosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const temObserver = 'IntersectionObserver' in window;
+
+    /* Entrada suave ao rolar. A classe .reveal é adicionada aqui, e não no HTML,
+       de propósito: se este script não rodar, o conteúdo continua visível em vez
+       de sumir para sempre. */
+    if (temObserver && !menosMovimento) {
+        const blocos = document.querySelectorAll('.hero, .section, .contact');
+        blocos.forEach((bloco) => bloco.classList.add('reveal'));
+
+        const observador = new IntersectionObserver((entradas) => {
+            entradas.forEach((entrada) => {
+                if (!entrada.isIntersecting) return;
+                entrada.target.classList.add('visivel');
+                observador.unobserve(entrada.target);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        blocos.forEach((bloco) => observador.observe(bloco));
+    }
+
+    /* Botão flutuante de WhatsApp: some ao chegar no contato, que já tem dois
+       botões para a mesma ação. */
+    const zap = document.getElementById('zapFlutuante');
+    const contato = document.getElementById('contato');
+
+    if (zap && contato && temObserver) {
+        new IntersectionObserver((entradas) => {
+            zap.classList.toggle('oculto', entradas[0].isIntersecting);
+        }, { threshold: 0.25 }).observe(contato);
+    }
+})();

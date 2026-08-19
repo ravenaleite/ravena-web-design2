@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabor do Sertão | Lanches e Refeições em Mauriti-CE</title>
+<meta name="description" content="Lanchonete em Mauriti-CE. Lanches, refeição do dia e açaí. Peça pelo WhatsApp e retire ou receba em casa.">
+
+<!-- Projeto demonstrativo: fora do índice do Google para não ser confundido com negócio real -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Pré-visualização ao compartilhar o link no WhatsApp e redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Sabor do Sertão | Mauriti-CE">
+<meta property="og:description" content="Lanches, refeição do dia e açaí. Peça pelo WhatsApp e receba em casa.">
+<meta property="og:url" content="https://ravena-web-design-oficial.netlify.app/demos/lanchonete-sabor-do-sertao.html">
+<meta property="og:image" content="https://ravena-web-design-oficial.netlify.app/demos/og-lanchonete.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sabor do Sertão | Mauriti-CE">
+<meta name="twitter:image" content="https://ravena-web-design-oficial.netlify.app/demos/og-lanchonete.png">
+<link rel="canonical" href="https://ravena-web-design-oficial.netlify.app/demos/lanchonete-sabor-do-sertao.html">
+<meta name="theme-color" content="#b5451f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#fdf8f0; --papel:#fffdf9; --terra:#b5451f; --terra-escuro:#8f3315;
+    --terra-rgb:181,69,31; --verde:#4a6b3a; --tinta:#33251c; --suave:#7a685c;
+    --linha:rgba(51,37,28,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--creme);color:var(--tinta);font-family:'Nunito',sans-serif;line-height:1.65;-webkit-tap-highlight-color:transparent}
+  h1,h2,h3{font-weight:800;line-height:1.15}
+  .container{max-width:1060px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  .aviso{background:var(--tinta);color:var(--creme);text-align:center;padding:9px 16px;font-size:13px;font-weight:600}
+
+  header{background:var(--terra);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  .barra{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;max-width:1060px;margin:0 auto}
+  .logo{font-size:22px;font-weight:800;display:flex;align-items:center;gap:9px}
+  nav a{margin-left:20px;font-size:14.5px;font-weight:600;text-decoration:none;opacity:.92}
+  nav a:hover{opacity:1;text-decoration:underline}
+  @media(max-width:640px){nav{display:none}}
+
+  .hero{padding:70px 0;background:
+     radial-gradient(600px 260px at 82% 10%, rgba(var(--terra-rgb),.14), transparent 70%),
+     var(--papel);
+     border-bottom:1px solid var(--linha)}
+  .hero-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  @media(max-width:760px){.hero-grade{grid-template-columns:1fr;text-align:center}}
+  .tag{display:inline-block;background:rgba(var(--terra-rgb),.12);color:var(--terra-escuro);border-radius:30px;padding:6px 15px;font-size:13px;font-weight:700;margin-bottom:16px}
+  .hero h1{font-size:clamp(34px,6vw,54px);margin-bottom:14px}
+  .hero h1 em{color:var(--terra);font-style:normal}
+  .hero p{color:var(--suave);font-size:18px;margin-bottom:26px;max-width:46ch}
+  @media(max-width:760px){.hero p{margin-left:auto;margin-right:auto}}
+
+  .btn{display:inline-block;background:var(--terra);color:#fff;font-weight:800;font-size:17px;padding:15px 32px;border-radius:40px;text-decoration:none;transition:.25s;box-shadow:0 8px 20px rgba(var(--terra-rgb),.28)}
+  .btn:hover{background:var(--terra-escuro);transform:translateY(-2px)}
+
+  .prato{background:var(--terra);border-radius:22px;padding:34px;color:#fff;box-shadow:0 20px 44px rgba(var(--terra-rgb),.3)}
+  .prato b{display:block;font-size:15px;opacity:.9;font-weight:700}
+  .prato .valor{font-size:52px;font-weight:800;line-height:1.1;margin:6px 0}
+  .prato small{opacity:.9;font-size:14.5px}
+
+  section{padding:60px 0}
+  .titulo{font-size:30px;margin-bottom:6px}
+  .sub{color:var(--suave);margin-bottom:30px}
+
+  .cardapio{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .item{background:var(--papel);border:1px solid var(--linha);border-radius:14px;padding:20px;display:flex;justify-content:space-between;gap:16px;transition:.2s}
+  .item:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(51,37,28,.1)}
+  .item h3{font-size:17px;margin-bottom:4px}
+  .item p{color:var(--suave);font-size:14px}
+  .item strong{color:var(--terra);font-size:19px;white-space:nowrap}
+
+  .faixa{background:var(--verde);color:#fff;padding:44px 0;text-align:center}
+  .faixa h2{font-size:28px;margin-bottom:8px}
+  .faixa p{opacity:.92}
+
+  .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:24px}
+  .info div{background:var(--papel);border:1px solid var(--linha);border-radius:14px;padding:20px}
+  .info b{display:block;color:var(--terra);margin-bottom:4px}
+  .info span{color:var(--suave);font-size:15px}
+
+  footer{background:var(--tinta);color:#d9cdc3;padding:30px 20px;text-align:center;font-size:14px}
+  .assinatura{margin-top:8px}
+  footer b{color:#fff}
+
+  .zap{position:fixed;right:16px;bottom:16px;width:54px;height:54px;border-radius:50%;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(var(--terra-rgb),.5);z-index:40;transition:transform .25s}
+  .zap:hover{transform:scale(1.08)}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Sabor do Sertão",
+  "description": "Lanchonete em Mauriti-CE. Lanches, refeição do dia e açaí, com entrega.",
+  "telephone": "+5588994744444",
+  "priceRange": "R$ 10 - R$ 26",
+  "servesCuisine": "Brasileira",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Praça da Matriz, 87 - Centro",
+    "addressLocality": "Mauriti",
+    "addressRegion": "CE",
+    "addressCountry": "BR"
+  },
+  "openingHours": [
+    "Mo-Sa 10:00-23:00",
+    "Su 16:00-23:00"
+  ]
+}
+</script>
+</head>
+<body>
+
+<p class="aviso">Projeto demonstrativo — negócio fictício, criado por Ravena Leite para mostrar o trabalho.</p>
+
+<header>
+  <div class="barra">
+    <span class="logo">🍔 Sabor do Sertão</span>
+    <nav>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#entrega">Entrega</a>
+      <a href="#visitar">Onde fica</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="container hero-grade">
+    <div>
+      <span class="tag">Mauriti-CE · Aberto hoje até 23h</span>
+      <h1>A fome bateu?<br><em>A gente resolve.</em></h1>
+      <p>Lanche na chapa, refeição caseira no almoço e açaí à tarde. Peça pelo WhatsApp e retire no balcão ou receba em casa.</p>
+      <a href="https://wa.me/5588994744444" class="btn">Fazer pedido</a>
+    </div>
+    <div class="prato">
+      <b>Prato do dia · segunda a sexta</b>
+      <div class="valor">R$ 18</div>
+      <small>Arroz, feijão de corda, macaxeira, salada e a carne do dia. Serve bem uma pessoa.</small>
+    </div>
+  </div>
+</div>
+
+<section id="cardapio">
+  <div class="container">
+    <h2 class="titulo">Cardápio</h2>
+    <p class="sub">Feito na hora, do jeito que o sertão gosta.</p>
+    <div class="cardapio">
+      <div class="item"><div><h3>X-Salada da casa</h3><p>Hambúrguer artesanal, queijo coalho, alface e tomate</p></div><strong>R$ 16</strong></div>
+      <div class="item"><div><h3>X-Tudo do Sertão</h3><p>Dois hambúrgueres, ovo, bacon, calabresa e queijo coalho</p></div><strong>R$ 26</strong></div>
+      <div class="item"><div><h3>Baião de dois</h3><p>Com queijo coalho, nata e carne de sol desfiada</p></div><strong>R$ 24</strong></div>
+      <div class="item"><div><h3>Tapioca recheada</h3><p>Queijo, frango ou carne de sol. Manhã e noite</p></div><strong>R$ 12</strong></div>
+      <div class="item"><div><h3>Açaí 500ml</h3><p>Com granola, banana e leite condensado</p></div><strong>R$ 15</strong></div>
+      <div class="item"><div><h3>Caldo de feijão</h3><p>Servido a partir das 18h, com torrada</p></div><strong>R$ 10</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="faixa" id="entrega">
+  <div class="container">
+    <h2>Entregamos em Mauriti e região</h2>
+    <p>Taxa de R$ 5 no centro. Pedido acima de R$ 40, a entrega é por nossa conta.</p>
+  </div>
+</div>
+
+<section id="visitar">
+  <div class="container">
+    <h2 class="titulo">Onde fica</h2>
+    <p class="sub">Praça da Matriz, 87 — Centro, Mauriti-CE</p>
+    <div class="info">
+      <div><b>Segunda a sábado</b><span>10h às 23h</span></div>
+      <div><b>Domingo</b><span>16h às 23h</span></div>
+      <div><b>Formas de pagamento</b><span>Pix, cartão e dinheiro</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Sabor do Sertão · Mauriti-CE · (88) 99474-4444</p>
+  <p class="assinatura">Projeto demonstrativo criado por <b>Ravena Web Design</b></p>
+</footer>
+
+<a class="zap" href="https://wa.me/5588994744444" aria-label="Fazer pedido no WhatsApp">
+  <svg viewBox="0 0 24 24" width="27" height="27" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.5 2 2 6.5 2 12.04c0 1.77.46 3.5 1.34 5.03L2 22.06l5.14-1.35a10 10 0 0 0 4.9 1.27c5.54 0 10.04-4.5 10.04-10.04C22.08 6.5 17.58 2 12.04 2zm5.85 15.89c-.25.7-1.47 1.37-2.02 1.45-.52.08-1.17.11-1.89-.12-.43-.14-.99-.33-1.71-.63-3.01-1.3-4.97-4.33-5.12-4.53-.15-.2-1.23-1.63-1.23-3.11 0-1.48.78-2.21 1.05-2.51.28-.3.61-.38.81-.38h.58c.19 0 .44-.07.69.53.25.6.86 2.09.94 2.24.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.3.77 1.27 1.66 2.06 1.14 1.01 2.1 1.32 2.4 1.47.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.08.13.08.72-.17 1.42z"/></svg>
+</a>
+
+</body>
+</html>
