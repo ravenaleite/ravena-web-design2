@@ -1,20 +1,26 @@
-# Ravena Web Design - Landing Page 3D
+# Ravena Web Design — site institucional
 
-Website profissional com cena 3D interativa para apresentar serviços de criação de sites.
+Site de uma página para apresentar serviços de criação de sites e otimização de
+PC, com portfólio navegável e cena 3D decorativa carregada sob demanda.
+
+**No ar:** https://ravena-web-design-oficial.netlify.app/
 
 ## 📁 Estrutura do Projeto
 
 ```
 WEB SITE NOVO VS CODE/
-├── index.html            # Página principal
+├── index.html            # Página principal (todo o conteúdo)
 ├── styles.css            # Estilos do site
-├── script.js             # Cena 3D (Three.js) + interface (scroll, contadores)
-├── og-image.png          # Imagem de preview ao compartilhar o link
+├── script.js             # Cena 3D (Three.js) + entrada suave ao rolar
+├── favicon.png           # Ícone da aba do navegador
 ├── apple-touch-icon.png  # Ícone na tela de início do iPhone/iPad
-├── trabalho-1.png        # Portfólio — print da Barbearia Dom Carlos
-├── trabalho-2.png        # Portfólio — print do Sabor do Sertão
-├── trabalho-3.png        # Portfólio — print da clínica Sorriso Claro
-├── sobre-mim.jpg         # Foto do "Sobre mim"
+├── og-image.png          # Preview ao compartilhar o link (1200×630)
+├── grao.png              # Grão de filme sobreposto à página
+├── textura-glitch.svg    # Grade pontilhada do fundo
+├── sobre-mim.jpg         # Foto do "Sobre mim" (640×640)
+├── trabalho-1.png        # Portfólio — print do demo da Barbearia Dom Carlos
+├── trabalho-2.png        # Portfólio — print do demo Sabor do Sertão
+├── trabalho-3.png        # Portfólio — print do demo Sorriso Claro
 ├── demos/                # Projetos demonstrativos (portfólio navegável)
 │   ├── barbearia-dom-carlos.html        # Salgueiro-PE · escuro + dourado
 │   ├── lanchonete-sabor-do-sertao.html  # Mauriti-CE · creme + terracota
@@ -24,27 +30,32 @@ WEB SITE NOVO VS CODE/
 └── README.md             # Este arquivo
 
 Ferramentas de desenvolvimento (fora do Git, não vão para o cliente):
-├── preview-mobile.html   # Ver o site em molduras de celular
-├── comparar-fontes.html  # Comparar fontes de título lado a lado
-└── auditar.py            # Auditoria pré-entrega (contraste, SEO, acessibilidade)
+├── preview-mobile.html            # Ver o site em molduras de celular
+├── comparar-fontes.html           # Comparar fontes de título lado a lado
+├── auditar.py                     # Auditoria pré-entrega
+└── RELATÓRIO-AUDITORIA-FINAL.md   # Resultado da última auditoria
 ```
 
 ## 🎨 Características
 
-- ✅ Cena 3D interativa com Three.js, carregada **sob demanda**: os ~600 KB da
-  biblioteca só são baixados em tela de 1024px ou mais e com conexão boa. No
-  celular, no tablet em pé ou em rede lenta, a página abre sem esse peso e o
-  layout se fecha sozinho (classe `sem-3d`)
+- ✅ Cena 3D com Three.js, **carregada sob demanda**: os ~600 KB da biblioteca
+  só são baixados quando a conexão comporta. Com economia de dados ligada ou em
+  rede 2G/3G, ela nem é baixada — **em qualquer tamanho de tela, inclusive
+  celular** — e o layout se fecha sozinho pela classe `sem-3d`, sem salto
+- ✅ Degrada com elegância: se o CDN cair ou o hash de integridade não bater, a
+  página abre inteira e o cartão da cena para de se anunciar como botão
 - ✅ Paleta tech/neon: azul profundo com gradientes ciano e rosa como destaque
 - ✅ Tipografia Bebas Neue (títulos) + Inter (texto)
-- ✅ Totalmente responsivo (mobile, tablet, desktop) com breakpoints em 420px, 768px e 1024px
-- ✅ Otimizado para conversão
+- ✅ Responsivo, com breakpoints em 420px, 768px e 1024px
 - ✅ Integração WhatsApp, com botão flutuante que some na seção de contato
-- ✅ Galeria de trabalhos em molduras de celular
+- ✅ Faixa rolante fixa no topo e galeria de trabalhos em molduras de celular
 - ✅ Google Maps incorporado (Salgueiro-PE e Mauriti-CE), sem chave de API
-- ✅ Entrada suave ao rolar e números que contam até o valor
-- ✅ Acessível: contraste WCAG AA, navegação por teclado, respeita `prefers-reduced-motion`
-- ✅ SEO: meta description, Open Graph, Twitter Card e dados estruturados de negócio local
+- ✅ Entrada suave ao rolar, conduzida pelo `script.js` (se o JS não rodar, o
+  conteúdo continua visível)
+- ✅ Acessível: contraste WCAG AA verificado, skip link, navegação por teclado,
+  respeita `prefers-reduced-motion` (faixa, grão, scroll suave e entradas param)
+- ✅ SEO: meta description, Open Graph, Twitter Card, canonical e dados
+  estruturados de negócio local (`ProfessionalService`)
 
 ## 🚀 Como Usar
 
@@ -57,9 +68,9 @@ Ferramentas de desenvolvimento (fora do Git, não vão para o cliente):
 
 ### 2. Editar Conteúdo
 
-**HTML** → Edite `index.html` (estrutura, textos)
-**CSS** → Edite `styles.css` (cores, fontes, layout)
-**JavaScript** → Edite `script.js` (cena 3D)
+**HTML** → `index.html` (estrutura, textos)
+**CSS** → `styles.css` (cores, fontes, layout)
+**JavaScript** → `script.js` (cena 3D, entrada ao rolar, botão flutuante)
 
 ### 3. Customizar Cores
 
@@ -67,25 +78,38 @@ As cores ficam centralizadas em variáveis no topo de `styles.css`, dentro de `:
 
 ```css
 :root {
-    --color-bg: #0a0e27;              /* fundo (azul muito escuro) */
-    --color-fg: #e0e7ff;              /* títulos e texto de destaque */
-    --color-accent: #00d4ff;          /* ciano — cor de ação (botões, links) */
+    --color-bg: #0a0e27;               /* fundo (azul muito escuro) */
+    --color-fg: #e0e7ff;               /* títulos e texto de destaque */
+    --color-accent: #00d4ff;           /* ciano — cor de ação (botões, links) */
     --color-accent-secondary: #ff0080; /* rosa — segundo acento */
     --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
     --gradient-accent: linear-gradient(135deg, #ff0080 0%, #ff6b00 100%);
 }
 ```
 
-Troque esses valores para mudar a paleta inteira do site de uma vez. As cores da gema 3D ficam em `script.js`, nas constantes `gemMat`, `coreMat` e nas luzes (`key`, `rim`).
+Troque esses valores para mudar a paleta inteira de uma vez. **Ao trocar,
+confira o contraste de novo** (`python3 auditar.py .`) — a paleta atual passa em
+WCAG AA e uma cor nova pode reprovar. As cores da gema 3D ficam em `script.js`,
+nas constantes `gemMat`, `coreMat` e nas luzes (`key`, `rim`).
 
 ### 4. Publicar (Netlify + GitHub)
 
-O repositório já está conectado ao GitHub (`devsravenacris-art/ravena-web-design2`). Fluxo recomendado:
+O repositório está conectado ao GitHub (`devsravenacris-art/ravena-web-design2`)
+e o Netlify publica sozinho a cada push.
 
-1. Suba as alterações pro GitHub (`git add`, `git commit`, `git push`)
-2. No [Netlify](https://app.netlify.com), importe o projeto conectando a conta GitHub e escolhendo esse repositório
-3. Não é necessário comando de build — é um site estático (publish directory: `.`)
-4. A cada novo `git push`, o Netlify publica a atualização automaticamente
+```bash
+git add -A
+git commit -m "descreva o que mudou"
+git push
+```
+
+> ⚠️ **Publicar é dar push.** Alteração salva no VS Code e não commitada não vai
+> ao ar. Antes de dizer que o site está atualizado, confira `git status` (limpo)
+> e `git status -sb` (sem "ahead"), e só então abra o site publicado.
+
+Se algum dia publicar arrastando a pasta para o Netlify em vez de usar o Git,
+lembre que as ferramentas de desenvolvimento listadas acima sobem junto — elas
+só ficam de fora porque estão no `.gitignore`.
 
 ## 📝 Edições Comuns
 
@@ -95,9 +119,10 @@ A pasta `demos/` tem três sites completos e navegáveis, criados para negócios
 fictícios da região. Cada um usa uma paleta e uma tipografia diferentes — a
 intenção é mostrar versatilidade, e não repetir o mesmo estilo três vezes.
 
-Todos trazem, no topo e no rodapé, o aviso de que são projetos demonstrativos.
-**Não remova esse aviso.** Demo assumida é prática normal de portfólio; demo
-apresentada como cliente real é propaganda enganosa.
+Todos trazem, no topo e no rodapé, o aviso de que são projetos demonstrativos, e
+saem do índice do Google por `noindex`. **Não remova esse aviso.** Demo assumida
+é prática normal de portfólio; demo apresentada como cliente real é propaganda
+enganosa.
 
 Os arquivos `trabalho-1.png`, `trabalho-2.png` e `trabalho-3.png` são as
 miniaturas exibidas na galeria da página principal. Para deixá-las idênticas ao
@@ -108,49 +133,60 @@ site renderizado:
 3. Tire um print só da área da tela (Win + Shift + S)
 4. Salve por cima da miniatura correspondente, mantendo o nome do arquivo
 
+> ⚠️ O nome do negócio precisa bater em **quatro** lugares: a legenda em
+> `index.html`, o `alt` da imagem, o `<title>` do arquivo em `demos/` e o texto
+> escrito dentro do próprio print. Se um deles ficar para trás, quem clica no
+> cartão cai num negócio com outro nome.
+
 Ao substituir por um **cliente real**, troque também o `alt` e a legenda em
 `index.html`, e remova a palavra "demonstrativo" daquele item.
 
-### ⚠️ Trocar a foto e o texto do "Sobre mim"
+### Trocar a foto do "Sobre mim"
 
-1. Substitua `sobre-mim.jpg` por uma foto sua **quadrada** (800 × 800 px é o ideal).
-   Foto de celular com luz de janela funciona bem; evite banco de imagens.
-2. Em `index.html`, na seção `id="sobre"`, reescreva o parágrafo que está entre
-   colchetes `[ ]`. Ele existe só como orientação e não pode ir ao ar.
+Substitua `sobre-mim.jpg` por uma foto sua **quadrada** (800 × 800 px é o ideal).
+Foto de celular com luz de janela, levemente de lado, funciona bem; evite banco
+de imagens e evite foto 3×4 de documento — numa página que vende design, ela
+trabalha contra o texto.
 
 ### Mudar Números de Telefone
-Procure em `index.html`:
-```html
-(87) 99161-4428
-(88) 99474-4444
+
+Aparecem em `index.html` (links `wa.me`, texto visível e o JSON-LD) e também nos
+três arquivos de `demos/`:
+
+```
+(87) 99161-4428   →   wa.me/5587991614428
+(88) 99474-4444   →   wa.me/5588994744444
 ```
 
 ### Mudar Email
-Procure em `index.html`:
-```html
-ravas2304@gmail.com
-```
 
-### Mudar GitHub
-Procure em `index.html`:
-```html
-https://github.com/devsravenacris-art
+Procure em `index.html` — aparece no link `mailto:`, no texto visível abaixo dos
+botões e no JSON-LD:
+
+```
+desenvolvedoraravena@proton.me
 ```
 
 ### Mudar Valores dos Planos
-Procure em `index.html` pelas seções de preços:
+
+Procure em `index.html` pela seção `id="precos"`. São quatro planos:
+
 ```html
-<div class="price">R$ 500</div>
-<div class="price">R$ 1.000</div>
-<div class="price">R$ 1.500</div>
+<div class="price">R$ 300</div>     <!-- Essencial -->
+<div class="price">R$ 500</div>     <!-- Básico -->
+<div class="price">R$ 1.000</div>   <!-- Profissional -->
+<div class="price">R$ 1.500</div>   <!-- Premium -->
 ```
+
+Ao mexer nos valores, atualize também `priceRange` no JSON-LD (topo do
+`index.html`) e a frase "Planos a partir de R$ 300" na `og:description`.
 
 ## 🔧 Tecnologias Usadas
 
 - HTML5
 - CSS3
 - JavaScript (ES6+)
-- Three.js (cena 3D)
+- Three.js r128 via cdnjs, com verificação de integridade (SRI)
 - Netlify (hospedagem)
 
 ## 📱 Navegadores Suportados
@@ -161,17 +197,27 @@ Procure em `index.html` pelas seções de preços:
 - Edge
 - Navegadores mobile (Android e iOS)
 
-## 🎯 Dicas de Uso
+## ✅ Antes de publicar
 
-1. **Para clientes de outras áreas**: troque os "cases" (Resultados Reais) pelo segmento relevante (personal trainer, coach, consultoria, etc.)
-2. **Cores**: ajuste fácil trocando as variáveis em `:root` no `styles.css`
-3. **Cena 3D**: ajuste velocidade de giro e sensibilidade ao toque em `script.js`
+```bash
+python3 auditar.py .
+```
+
+O script cobre o que é objetivo: contraste, meta tags, segredos, higiene de Git,
+semântica. O que ele **não** cobre e você precisa conferir a olho:
+
+- Este README ainda descreve o site que existe? (é o arquivo que envelhece mais rápido)
+- Toda afirmação verificável do site é verdadeira? (selos de "mais contratado",
+  depoimentos, percentuais, cases)
+- Testou num **Android intermediário real**? Emulador simula tamanho de tela,
+  não simula GPU — e o site usa `backdrop-filter`, material com `transmission`
+  e 600 partículas
 
 ## 📧 Contato & Suporte
 
-Questões sobre o site:
-- GitHub: https://github.com/devsravenacris-art
 - WhatsApp: (87) 99161-4428
+- Email: desenvolvedoraravena@proton.me
+- GitHub: https://github.com/devsravenacris-art
 
 ---
 

@@ -12,6 +12,15 @@ const canvas = document.getElementById('canvas3d');
 const sceneCard = document.getElementById('sceneCard');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Verificação de integridade (SRI): o navegador calcula o hash do arquivo que
+   baixou e só executa se bater com o THREE_SRI abaixo — se o CDN for
+   comprometido, o script é recusado.
+
+   Ao trocar a versão do Three.js, o hash MUDA e precisa ser copiado de novo da
+   página do cdnjs. Nunca invente um hash: hash errado impede o carregamento, e
+   como a falha aqui é silenciosa (a página cai em "sem-3d" e continua inteira),
+   a gema simplesmente não aparece e ninguém percebe. Para conferir no site
+   publicado: F12 -> Console. "Failed to find a valid digest" = hash errado. */
 const THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
 const THREE_SRI = 'sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu';
 
@@ -239,7 +248,12 @@ if (canvas && !document.documentElement.classList.contains('sem-3d')) {
                 entrada.target.classList.add('visivel');
                 observador.unobserve(entrada.target);
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+           /* threshold 0 de propósito, não 0.12: uma seção mais alta que a
+              janela nunca alcança 12% de si mesma visível. Medido em 740x360
+              (celular deitado), a seção de preços chega a no máximo 11,8% — com
+              limiar de 0.12 ela ficaria invisível para sempre. Com 0, o gatilho
+              é o rootMargin: revela quando entra 40px na tela. */
+        }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
         blocos.forEach((bloco) => observador.observe(bloco));
     }
