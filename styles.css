@@ -417,6 +417,10 @@ html.sem-3d .site-header {
     font-size: clamp(2em, 6vw, 3.5em);
     margin-bottom: 20px;
     letter-spacing: 0.02em;
+    /* Equilibra o comprimento das linhas em vez de encher a primeira até o
+       limite: sem isso o título quebrava em "...achado e / pra ser chamado",
+       deixando a conjunção pendurada. Navegador que não conhece, ignora. */
+    text-wrap: balance;
 }
 
 .hero p {
@@ -434,6 +438,7 @@ html.sem-3d .site-header {
 }
 
 .hero-mini {
+    text-wrap: balance;
     margin-top: 16px;
     font-size: 0.85em;
     color: var(--color-text-subtle);
