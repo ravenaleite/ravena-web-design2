@@ -55,8 +55,7 @@
       "address": [
         { "@type": "PostalAddress", "addressLocality": "Salgueiro", "addressRegion": "PE", "addressCountry": "BR" },
         { "@type": "PostalAddress", "addressLocality": "Mauriti", "addressRegion": "CE", "addressCountry": "BR" }
-      ],
-      "sameAs": ["https://github.com/devsravenacris-art"]
+      ]
     }
     </script>
 
@@ -69,23 +68,49 @@
     -->
     <!--
       Decide, antes de a página desenhar, se vale carregar a cena 3D. O
-      Three.js pesa ~600 KB e serve só à decoração: em tela pequena, com
-      economia de dados ligada ou em conexão lenta, ele nem é baixado.
-      A classe "sem-3d" fecha o espaço reservado, evitando salto de layout.
+      Three.js pesa ~600 KB e serve só à decoração: com economia de dados
+      ligada ou em conexão lenta, ele nem é baixado — em qualquer tamanho
+      de tela. A classe "sem-3d" fecha o espaço reservado, evitando salto
+      de layout.
     -->
     <script>
     (function () {
         var rede = navigator.connection || {};
         var lenta = rede.saveData === true ||
                     /^(slow-2g|2g|3g)$/.test(rede.effectiveType || '');
-        var vale = window.innerWidth >= 1024 && !lenta;
-        if (!vale) document.documentElement.classList.add('sem-3d');
+        if (lenta) document.documentElement.classList.add('sem-3d');
     })();
     </script>
 
     <script defer src="script.js"></script>
 </head>
 <body>
+
+<!-- TEXTURA DE FUNDO — grade pontilhada + símbolos soltos, decorativa -->
+<div class="textura-fundo" aria-hidden="true"></div>
+
+<!-- FAIXA ROLANTE — puramente decorativa, por isso aria-hidden -->
+<div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+        <span class="ticker-item">Sites que vendem</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <span class="ticker-item">PC otimizado</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <span class="ticker-item">WhatsApp integrado</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <span class="ticker-item">Salgueiro-PE &amp; Mauriti-CE</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <!-- conteúdo duplicado, para o loop ficar contínuo sem salto -->
+        <span class="ticker-item">Sites que vendem</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <span class="ticker-item">PC otimizado</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <span class="ticker-item">WhatsApp integrado</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        <span class="ticker-item">Salgueiro-PE &amp; Mauriti-CE</span>
+        <svg class="ticker-icone" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+    </div>
+</div>
 
 <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
@@ -251,29 +276,27 @@
             <div class="sobre-texto">
                 <p class="sobre-nome">Prazer, sou a Ravena.</p>
                 <p>
-                    Sou desenvolvedora web e moro entre Salgueiro e Mauriti. Trabalho
-                    com donos de negócio da região que sabem que precisam aparecer na
-                    internet, mas não querem lidar com a parte técnica.
+                    Sou desenvolvedora web e moro entre Salgueiro e Mauriti.
                 </p>
                 <!-- Ajuste para o seu jeito de falar. O tom é este: competência
                      afirmada, sem prometer número que não dá para comprovar. -->
                 <p>
                     Os três sites do portfólio acima eu criei do zero — layout, código,
-                    responsividade e WhatsApp funcionando. Cada linha é minha. Faço
-                    questão de mostrar assim porque você vê o resultado antes de
-                    contratar, e não depois.
+                    responsividade e integração com WhatsApp. Prefiro mostrar o trabalho
+                    pronto a descrevê-lo: assim você conhece o resultado antes de
+                    decidir, não depois.
                 </p>
 
                 <p class="sobre-destaque">
-                    Sem atendente, sem fila, sem sotaque de agência.
+                    Atendimento direto, sem intermediários.
                 </p>
 
                 <p>
-                    Você fala comigo direto, do orçamento ao suporte. E depois que o
-                    site entra no ar eu continuo por aqui: precisou mudar um preço,
-                    trocar uma foto ou tirar uma dúvida, é só me chamar no WhatsApp que
-                    eu resolvo. Se preferir deixar isso por minha conta, a gente combina
-                    um plano de manutenção que caiba no seu bolso.
+                    Você fala comigo do início ao fim, do orçamento ao suporte. Depois
+                    que o site entra no ar, continuo à disposição: precisou ajustar um
+                    preço, trocar uma foto ou tirar uma dúvida, é só chamar no WhatsApp.
+                    Se preferir deixar essa parte comigo, montamos um plano de
+                    manutenção do tamanho do seu negócio.
                 </p>
 
                 <a href="#contato" class="button">Falar comigo</a>
@@ -421,10 +444,6 @@
 
         <div class="contact-extra">
             <p class="contact-meta">Salgueiro, PE &nbsp;·&nbsp; Mauriti, CE</p>
-            <p class="contact-meta">
-                GitHub:
-                <a href="https://github.com/devsravenacris-art" target="_blank" rel="noopener noreferrer">devsravenacris-art</a>
-            </p>
         </div>
     </section>
 

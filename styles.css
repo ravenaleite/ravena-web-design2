@@ -29,6 +29,7 @@
 
     --hero-size: 360px;
     --hero-gap: 120px;
+    --ticker-h: 34px;
 
     /* Sombras modernas */
     --shadow-sm: 0 4px 6px rgba(0, 212, 255, 0.1);
@@ -43,6 +44,7 @@
 }
 
 html {
+    background: var(--color-bg);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
@@ -107,10 +109,72 @@ body::after {
     }
 }
 
+/* TEXTURA DE FUNDO — grade pontilhada + símbolos soltos, tipo "código",
+   bem apagada, atrás de tudo. Puramente atmosférica, como o grão de filme. */
+.textura-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("textura-glitch.svg");
+    background-repeat: repeat;
+}
+
+/* FAIXA ROLANTE — banner fino e contínuo no topo da página, reforça a
+   mensagem principal sem disputar espaço com o conteúdo. */
+.ticker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    height: var(--ticker-h);
+    overflow: hidden;
+    background: rgba(5, 8, 16, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.ticker-track {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 100%;
+    width: max-content;
+    padding-left: 28px;
+    white-space: nowrap;
+    animation: ticker-rolar 26s linear infinite;
+}
+
+.ticker-item {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.ticker-icone {
+    color: var(--color-accent);
+    flex-shrink: 0;
+}
+
+@keyframes ticker-rolar {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+        animation: none;
+    }
+}
+
 .skip-link {
     position: absolute;
     left: -9999px;
-    top: 0;
+    top: var(--ticker-h);
     z-index: 100;
     background: var(--gradient-accent);
     color: var(--color-surface-deep);
