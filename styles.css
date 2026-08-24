@@ -282,6 +282,42 @@ html.sem-3d .site-header {
     letter-spacing: 0.1em;
 }
 
+/* Navegação do cabeçalho — leva às seções, sem competir com o h1 grande */
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 10px;
+    margin-top: 26px;
+}
+
+.site-nav a {
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.site-nav a:hover {
+    color: var(--color-fg);
+    border-color: rgba(0, 212, 255, 0.25);
+}
+
+.site-nav a.nav-cta {
+    color: var(--color-surface-deep);
+    background: var(--gradient-primary);
+    font-weight: 700;
+}
+
+.site-nav a.nav-cta:hover {
+    color: var(--color-surface-deep);
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -362,6 +398,13 @@ html.sem-3d .site-header {
     margin-top: 10px;
 }
 
+.hero-mini {
+    margin-top: 16px;
+    font-size: 0.85em;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.01em;
+}
+
 /* Seções principais */
 .section {
     margin: 80px 0;
@@ -398,11 +441,44 @@ html.sem-3d .site-header {
     letter-spacing: 0.03em;
 }
 
-.section > p {
+.section > p,
+.section-heading > p {
     color: var(--color-text-muted);
     font-size: 1.05em;
     margin-bottom: 30px;
     line-height: 1.8;
+}
+
+/* Etiqueta curta acima dos títulos de seção — reforça a organização
+   sem repetir o que o título já diz. */
+.eyebrow {
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+}
+
+/* Título e descrição lado a lado nas seções mais largas — a descrição
+   some do fluxo do título e passa a "responder" a ele, em vez de só
+   empilhar por baixo. Em telas estreitas, os dois voltam a empilhar. */
+.section-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px 40px;
+    margin-bottom: 10px;
+}
+
+.section-heading h3 {
+    margin-bottom: 0;
+}
+
+.section-heading > p {
+    flex: 0 1 420px;
+    margin-bottom: 4px;
 }
 
 /* Galeria de trabalhos */
@@ -746,14 +822,80 @@ html.sem-3d .site-header {
     white-space: nowrap;
 }
 
-/* Footer */
+/* Cartão em destaque na grade de preços (plano "mais contratado") */
+.price-card--destaque {
+    position: relative;
+    transform: translateY(-6px);
+    border-color: rgba(0, 212, 255, 0.5);
+}
+
+/* Selos soltos abaixo dos cards de serviço */
+.beneficios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.beneficios span {
+    padding: 10px 16px;
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(0, 212, 255, 0.06);
+    color: var(--color-text-muted);
+    font-size: 0.9em;
+}
+
+/* Aviso de transparência abaixo dos planos */
+.precos-transparencia {
+    margin: 24px auto 0;
+    max-width: 850px;
+    padding: 16px 22px;
+    text-align: center;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(0, 212, 255, 0.05);
+    color: var(--color-text-muted);
+}
+
+.precos-transparencia strong {
+    color: var(--color-fg);
+}
+
+@media (max-width: 768px) {
+    .price-card--destaque {
+        transform: none;
+    }
+
+    .beneficios {
+        justify-content: center;
+    }
+}
+
+/* Footer — marca à esquerda, crédito à direita; empilha e centraliza no celular */
 footer {
     margin-top: 100px;
-    padding: 60px 20px;
+    padding: 40px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
     background: linear-gradient(180deg, var(--color-surface-deep) 0%, rgba(5, 8, 16, 0.8) 100%);
     border-top: 1px solid rgba(0, 212, 255, 0.1);
-    text-align: center;
     color: var(--color-text-muted);
+}
+
+.footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.2em;
+    letter-spacing: 0.03em;
+    color: var(--color-fg);
+}
+
+.footer-info {
+    text-align: right;
 }
 
 footer a {
@@ -765,6 +907,17 @@ footer a {
 footer a:hover {
     color: var(--color-accent-light);
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    footer {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
 }
 
 /* Reveal animation para conteúdo ao rolar */
