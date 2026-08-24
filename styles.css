@@ -291,6 +291,7 @@ html.sem-3d .site-header {
 /* Botões modernos */
 .button {
     display: inline-block;
+    vertical-align: middle;
     padding: 14px 32px;
     background: var(--gradient-primary);
     color: var(--color-surface-deep);
@@ -958,7 +959,8 @@ footer a:hover {
    isso só é combinado por WhatsApp depois que o orçamento é fechado. */
 .contact-pix {
     display: inline-block;
-    margin: 4px 0 20px;
+    vertical-align: middle;
+    margin: 4px 8px 20px;
     padding: 6px 18px;
     border: 1px solid rgba(0, 212, 255, 0.3);
     border-radius: 20px;
