@@ -690,14 +690,25 @@ html.sem-3d .site-header {
 .price {
     font-size: 2.5em;
     margin: 15px 0;
+    padding: 0 6px;
     color: var(--color-accent-light);
     font-weight: 700;
+    display: inline-block;
+    line-height: 1.15;
 }
 
 .price-note {
     color: var(--color-text-muted);
     font-size: 0.9em;
     margin-bottom: 20px;
+}
+
+.price-parcelas {
+    color: var(--color-accent-light);
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-top: -8px;
+    margin-bottom: 6px;
 }
 
 .price-card ul {
@@ -941,6 +952,21 @@ footer a:hover {
 
 .contact-phones a:hover {
     text-decoration: underline;
+}
+
+/* Selo simples avisando que Pix é aceito — sem chave nem QR code aqui,
+   isso só é combinado por WhatsApp depois que o orçamento é fechado. */
+.contact-pix {
+    display: inline-block;
+    margin: 4px 0 20px;
+    padding: 6px 18px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 20px;
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--color-accent-light);
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.03em;
 }
 
 .contact-meta {
