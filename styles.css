@@ -338,6 +338,7 @@ html.sem-3d .site-header {
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 0, 128, 0.05) 100%);
     border: 1px solid rgba(0, 212, 255, 0.2);
     border-radius: 12px;
+    box-shadow: 0 0 70px rgba(0, 212, 255, 0.06);
     animation: fadeInUp 0.8s ease-out;
 }
 
@@ -405,14 +406,20 @@ html.sem-3d .site-header {
 }
 
 /* Galeria de trabalhos */
+/* flex + wrap, em vez de grid, para a última linha incompleta (3 itens,
+   número que não fecha uma grade redonda) ficar centralizada em vez de
+   um item sobrando sozinho alinhado à esquerda */
 .galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
     margin: 30px 0;
 }
 
 .trabalho {
+    flex: 1 1 280px;
+    max-width: 340px;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(0, 212, 255, 0.2);
@@ -642,8 +649,8 @@ html.sem-3d .site-header {
 /* Seção de preços */
 .prices {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
     margin: 40px 0;
 }
 
@@ -735,6 +742,8 @@ html.sem-3d .site-header {
 
 .price-card .button {
     align-self: center;
+    padding: 14px 20px;
+    white-space: nowrap;
 }
 
 /* Footer */
@@ -800,7 +809,22 @@ footer a:hover {
 }
 
 /* Responsividade */
+
+/* Tablets — a cena 3D e o cartão circular encolhem junto com a tela;
+   sem isso, a área reservada pra gema ficava do tamanho do desktop em
+   qualquer aparelho, sobrando um vão vazio desproporcional no topo. */
+@media (max-width: 1024px) {
+    :root {
+        --hero-size: 280px;
+    }
+}
+
 @media (max-width: 768px) {
+    :root {
+        --hero-size: 220px;
+        --hero-gap: 90px;
+    }
+
     .site-header {
         padding: 40px 20px 30px;
     }
@@ -824,6 +848,11 @@ footer a:hover {
         margin: 0 auto;
     }
 
+    .hero h2 {
+        font-size: clamp(1.5em, 6.5vw, 2.2em);
+        line-height: 1.2;
+    }
+
     .hero p {
         font-size: 1em;
     }
@@ -842,8 +871,17 @@ footer a:hover {
 }
 
 @media (max-width: 420px) {
+    :root {
+        --hero-size: 170px;
+        --hero-gap: 70px;
+    }
+
     .site-header h1 {
         font-size: 1.8em;
+    }
+
+    .hero h2 {
+        font-size: 1.5em;
     }
 
     .site-header p {
@@ -860,8 +898,12 @@ footer a:hover {
     }
 
     .galeria {
-        grid-template-columns: 1fr;
         gap: 20px;
+    }
+
+    .trabalho {
+        flex-basis: 100%;
+        max-width: 340px;
     }
 
     .passos {
