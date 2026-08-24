@@ -61,17 +61,32 @@
 
     <!--
       Decide, antes de a página desenhar, se vale carregar a cena 3D. O
-      Three.js pesa ~600 KB e serve só à decoração: com economia de dados
-      ligada ou em conexão lenta, ele nem é baixado — em qualquer tamanho
-      de tela. A classe "sem-3d" fecha o espaço reservado, evitando salto
-      de layout.
+      Three.js pesa ~600 KB e serve só à decoração: em conexão apertada ele
+      nem é baixado — em qualquer tamanho de tela. A classe "sem-3d" fecha o
+      espaço reservado, evitando salto de layout.
+
+      Sobre o effectiveType: ele NÃO tem valor para 5G. A API só devolve
+      'slow-2g', '2g', '3g' ou '4g', e trata tudo que é rápido como '4g'. Então
+      um 5G e um 4G engasgado chegam aqui exatamente iguais, e sozinho ele não
+      distingue os dois. Quem separa é o downlink (banda estimada em Mbps).
     -->
     <script>
     (function () {
         var rede = navigator.connection || {};
-        var lenta = rede.saveData === true ||
-                    /^(slow-2g|2g|3g)$/.test(rede.effectiveType || '');
-        if (lenta) document.documentElement.classList.add('sem-3d');
+
+        // O Chrome limita o downlink a 10 Mbps por privacidade: no 5G o valor
+        // bate no teto, o que é justamente o sinal de que dá para carregar.
+        var banda = typeof rede.downlink === 'number' ? rede.downlink : null;
+
+        // 1,5 Mbps = os 600 KB levariam mais de 3 segundos só para chegar.
+        // Se o navegador não informa a banda, seguimos em frente: na dúvida,
+        // carrega — o pior caso aqui é uma decoração que demora, não um site
+        // quebrado.
+        var apertada = rede.saveData === true ||
+                       /^(slow-2g|2g|3g)$/.test(rede.effectiveType || '') ||
+                       (banda !== null && banda > 0 && banda < 1.5);
+
+        if (apertada) document.documentElement.classList.add('sem-3d');
     })();
     </script>
 
