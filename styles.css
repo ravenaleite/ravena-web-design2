@@ -57,8 +57,10 @@ html {
 
 body {
     font-family: var(--font-body);
+    /* Sem "background-attachment: fixed": o Safari do iPhone não o honra como o
+       desktop e ainda repinta a tela inteira a cada rolagem. O gradiente fixo de
+       verdade é o body::before, que já é position: fixed. */
     background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
-    background-attachment: fixed;
     color: var(--color-text);
     line-height: 1.7;
     overflow-x: hidden;
@@ -160,6 +162,15 @@ body::after {
     flex-shrink: 0;
 }
 
+/* iPhone: com viewport-fit=cover a página passa a ocupar também a faixa do
+   notch e a da barra inferior. Estas regras devolvem esse espaço aos elementos
+   fixos, para nada ficar embaixo do recorte da tela. Navegadores sem env()
+   simplesmente ignoram a declaração e ficam com a regra anterior. */
+.ticker {
+    height: calc(var(--ticker-h) + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
 @keyframes ticker-rolar {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -189,6 +200,10 @@ body::after {
     left: 0;
 }
 
+.skip-link {
+    top: calc(var(--ticker-h) + env(safe-area-inset-top, 0px));
+}
+
 /* A faixa rolante é fixa e cobre os primeiros 34px da janela. Sem esta regra,
    clicar num link do menu encosta a seção em y=0 e a etiqueta da seção (PREÇOS,
    PORTFÓLIO...) fica escondida atrás dela — medido em 390px de largura. */
@@ -200,6 +215,7 @@ body::after {
 #pc,
 #contato {
     scroll-margin-top: calc(var(--ticker-h) + 16px);
+    scroll-margin-top: calc(var(--ticker-h) + env(safe-area-inset-top, 0px) + 16px);
 }
 
 a:focus-visible,
@@ -305,8 +321,14 @@ html.sem-3d .site-header {
     margin-top: 26px;
 }
 
+/* 44px de altura mínima: é o alvo mínimo da Apple e o do Android. Estava em
+   41px — perto o bastante para parecer certo e errado o bastante para o dedo
+   escorregar. */
 .site-nav a {
-    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 18px;
     border-radius: 999px;
     color: var(--color-text-muted);
     text-decoration: none;
@@ -569,6 +591,21 @@ html.sem-3d .site-header {
     color: var(--color-accent);
     margin-bottom: 5px;
     font-weight: 600;
+}
+
+/* Fecho da galeria: a pessoa acabou de ver o trabalho pronto e precisa de um
+   caminho antes de rolar para a próxima seção. */
+.pos-galeria {
+    margin: 10px auto 18px;
+    max-width: 46ch;
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.button--centro {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 /* Passos */
@@ -990,6 +1027,11 @@ footer a:hover {
     text-decoration: none;
 }
 
+#zapFlutuante {
+    bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+    right: calc(30px + env(safe-area-inset-right, 0px));
+}
+
 #zapFlutuante:hover {
     transform: scale(1.15) translateY(-5px);
     box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
@@ -1056,6 +1098,8 @@ footer a:hover {
     #zapFlutuante {
         bottom: 20px;
         right: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        right: calc(20px + env(safe-area-inset-right, 0px));
         width: 55px;
         height: 55px;
         font-size: 1.2em;
@@ -1118,6 +1162,10 @@ footer a:hover {
         height: 50px;
         bottom: 15px;
         right: 15px;
+        /* A barra inferior do iPhone fica exatamente aqui: sem o inset, o botão
+           encosta nela e vira alvo disputado com o gesto de voltar à tela inicial. */
+        bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+        right: calc(15px + env(safe-area-inset-right, 0px));
         font-size: 1em;
     }
 }
@@ -1202,14 +1250,48 @@ footer a:hover {
     margin: 20px 0;
 }
 
+/* Os dois números eram os links mais importantes da página e mediam 20px de
+   altura — menos da metade do mínimo. Como bloco, ganham área de toque de
+   verdade e param de brigar um com o outro no dedo. */
+.contact-phones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
 .contact-phones a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 212, 255, 0.25);
     color: var(--color-accent-light);
     text-decoration: none;
     font-weight: 700;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.contact-phones a:hover {
+    border-color: rgba(0, 212, 255, 0.6);
+    background: rgba(0, 212, 255, 0.08);
+    text-decoration: none;
 }
 
 .contact-phones a:hover {
     text-decoration: underline;
+}
+
+/* Os dois botões eram inline-block soltos: no celular quebravam de linha e
+   encostavam um no outro, sem folga entre os alvos de toque. */
+.contact-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin: 24px 0 10px;
 }
 
 .contact-meta {
