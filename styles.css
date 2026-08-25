@@ -29,7 +29,6 @@
 
     --hero-size: 360px;
     --hero-gap: 120px;
-    --ticker-h: 34px;
 
     /* Sombras modernas */
     --shadow-sm: 0 4px 6px rgba(0, 212, 255, 0.1);
@@ -122,70 +121,10 @@ body::after {
     background-repeat: repeat;
 }
 
-/* FAIXA ROLANTE — banner fino e contínuo no topo da página, reforça a
-   mensagem principal sem disputar espaço com o conteúdo. */
-.ticker {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 90;
-    height: var(--ticker-h);
-    overflow: hidden;
-    background: rgba(5, 8, 16, 0.85);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-}
-
-.ticker-track {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    height: 100%;
-    width: max-content;
-    padding-left: 28px;
-    white-space: nowrap;
-    animation: ticker-rolar 26s linear infinite;
-}
-
-.ticker-item {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-}
-
-.ticker-icone {
-    color: var(--color-accent);
-    flex-shrink: 0;
-}
-
-/* iPhone: com viewport-fit=cover a página passa a ocupar também a faixa do
-   notch e a da barra inferior. Estas regras devolvem esse espaço aos elementos
-   fixos, para nada ficar embaixo do recorte da tela. Navegadores sem env()
-   simplesmente ignoram a declaração e ficam com a regra anterior. */
-.ticker {
-    height: calc(var(--ticker-h) + env(safe-area-inset-top, 0px));
-    padding-top: env(safe-area-inset-top, 0px);
-}
-
-@keyframes ticker-rolar {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .ticker-track {
-        animation: none;
-    }
-}
-
 .skip-link {
     position: absolute;
     left: -9999px;
-    top: var(--ticker-h);
+    top: 0;
     z-index: 100;
     background: var(--gradient-accent);
     color: var(--color-surface-deep);
@@ -201,12 +140,11 @@ body::after {
 }
 
 .skip-link {
-    top: calc(var(--ticker-h) + env(safe-area-inset-top, 0px));
+    top: env(safe-area-inset-top, 0px);
 }
 
-/* A faixa rolante é fixa e cobre os primeiros 34px da janela. Sem esta regra,
-   clicar num link do menu encosta a seção em y=0 e a etiqueta da seção (PREÇOS,
-   PORTFÓLIO...) fica escondida atrás dela — medido em 390px de largura. */
+/* Uma folga ao chegar na seção por link do menu, mais o recorte da tela no
+   iPhone: sem ela o título encosta na borda de cima. */
 #conteudo,
 #trabalhos,
 #servicos,
@@ -214,8 +152,8 @@ body::after {
 #sobre,
 #pc,
 #contato {
-    scroll-margin-top: calc(var(--ticker-h) + 16px);
-    scroll-margin-top: calc(var(--ticker-h) + env(safe-area-inset-top, 0px) + 16px);
+    scroll-margin-top: 16px;
+    scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 16px);
 }
 
 a:focus-visible,
