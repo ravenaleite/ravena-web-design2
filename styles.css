@@ -55,6 +55,12 @@ html {
 }
 
 body {
+    /* Reserva o espaço da cena 3D aqui, e não com margin-top no cabeçalho.
+       Margem do primeiro filho colapsa através do body e arrasta a caixa dele
+       para baixo — o canvas, que é absoluto e se resolve contra o body, ia
+       junto, deixando o topo vazio e desenhando a gema abaixo do espaço.
+       Padding não colapsa, e "top: 0" se resolve contra a caixa de padding. */
+    padding-top: var(--hero-size);
     font-family: var(--font-body);
     /* Sem "background-attachment: fixed": o Safari do iPhone não o honra como o
        desktop e ainda repinta a tela inteira a cada rolagem. O gradiente fixo de
@@ -173,10 +179,6 @@ html.sem-3d body {
     --hero-gap: 0px;
 }
 
-html.sem-3d .site-header {
-    margin-top: 0;
-}
-
 #canvas3d {
     position: absolute;
     top: 0;
@@ -201,7 +203,9 @@ html.sem-3d .site-header {
 
 .scene-card {
     position: absolute;
-    top: 50%;
+    /* metade do espaço da cena, não metade da página: com top:50% este cartão
+       ia parar a 4200px do topo, no meio do conteúdo, levando junto o brilho. */
+    top: calc(var(--hero-size) / 2);
     left: 50%;
     transform: translate(-50%, -50%);
     width: var(--hero-size);
@@ -228,7 +232,6 @@ html.sem-3d .site-header {
 .site-header {
     position: relative;
     z-index: 10;
-    margin-top: var(--hero-size);
     padding: 60px 20px 40px;
     text-align: center;
     background: linear-gradient(180deg, rgba(21, 26, 47, 0.8) 0%, transparent 100%);
