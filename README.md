@@ -13,6 +13,7 @@ WEB SITE NOVO VS CODE/
 ├── styles.css            # Estilos do site
 ├── script.js             # Cena 3D (Three.js) + entrada suave ao rolar
 ├── favicon.png           # Ícone da aba do navegador
+├── favicon.ico           # Mesmo ícone no formato que o navegador pede sozinho
 ├── apple-touch-icon.png  # Ícone na tela de início do iPhone/iPad
 ├── og-image.png          # Preview ao compartilhar o link (1200×630)
 ├── grao.png              # Grão de filme sobreposto à página
