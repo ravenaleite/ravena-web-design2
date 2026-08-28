@@ -235,6 +235,43 @@ if (canvas && !document.documentElement.classList.contains('sem-3d')) {
     const menosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const temObserver = 'IntersectionObserver' in window;
 
+    /* Título do Hero tem quebra de linha manual (&nbsp; no HTML) pensada pro
+       tamanho da Bebas Neue. Se ela não carregar — rede lenta, bloqueio de
+       terceiros — a fonte de fallback (Impact/Arial Narrow) é mais larga e
+       pode estourar o cartão. Em vez de confiar só na quebra manual, medimos
+       a linha mais larga de verdade e encolhemos a fonte em passos pequenos
+       até caber. Roda de novo ao redimensionar e quando as fontes terminam
+       de carregar, e sempre parte do tamanho original do CSS (nunca só
+       encolhe): a janela pode crescer de novo. */
+    function ajustarTituloHero() {
+        const h2 = document.querySelector('.hero h2');
+        if (!h2) return;
+
+        function cabe() {
+            const intervalo = document.createRange();
+            intervalo.selectNodeContents(h2);
+            return intervalo.getBoundingClientRect().width <= h2.getBoundingClientRect().width + 1;
+        }
+
+        function ajustar() {
+            h2.style.fontSize = '';
+            let tentativas = 8;
+            while (!cabe() && tentativas > 0) {
+                const atual = parseFloat(getComputedStyle(h2).fontSize);
+                h2.style.fontSize = (atual * 0.95) + 'px';
+                tentativas--;
+            }
+        }
+
+        ajustar();
+        window.addEventListener('resize', ajustar, { passive: true });
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(ajustar).catch(() => {});
+        }
+    }
+
+    ajustarTituloHero();
+
     /* Entrada suave ao rolar. A classe .reveal é adicionada aqui, e não no HTML,
        de propósito: se este script não rodar, o conteúdo continua visível em vez
        de sumir para sempre. */
