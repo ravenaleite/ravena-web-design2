@@ -120,7 +120,7 @@ contraste e mesmo assim brilha e cansa a vista. As cores da gema 3D ficam em
 
 ### 4. Publicar (Netlify + GitHub)
 
-O repositório está conectado ao GitHub (`devsravenacris-art/ravena-web-design2`)
+O repositório está conectado ao GitHub (`ravenaleite/ravena-web-design2`)
 e o Netlify publica sozinho a cada push.
 
 ```bash
@@ -243,7 +243,7 @@ semântica. O que ele **não** cobre e você precisa conferir a olho:
 
 - WhatsApp: (87) 99161-4428
 - Email: desenvolvedoraravena@proton.me
-- GitHub: https://github.com/devsravenacris-art
+- GitHub: https://github.com/ravenaleite
 
 ---
 
