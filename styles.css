@@ -441,6 +441,18 @@ html.sem-3d body {
     letter-spacing: -0.02em;
 }
 
+/* Fio curto embaixo do título: dá começo visível à seção sem precisar de
+   uma caixa em volta de tudo. */
+.section h3::after {
+    content: "";
+    display: block;
+    width: 68px;
+    height: 2px;
+    margin-top: 16px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, rgba(53, 198, 232, 0) 100%);
+}
+
 .section > p,
 .section-heading > p {
     color: var(--color-text-muted);
@@ -457,7 +469,21 @@ html.sem-3d body {
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-text-muted);
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    /* A barrinha é marca gráfica, não texto colorido: dá presença de cor
+       à seção sem disputar atenção com os botões. */
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 4px;
+    height: 1.05em;
+    border-radius: 3px;
+    background: var(--gradient-primary);
+    flex: none;
 }
 
 /* Título e descrição lado a lado nas seções mais largas — a descrição
@@ -598,12 +624,18 @@ html.sem-3d body {
     content: counter(step);
     counter-increment: step;
     position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 4em;
-    opacity: 0.1;
-    font-weight: bold;
-    color: var(--color-fg);
+    /* Estava em -10px/-10px: com o cartão em overflow:hidden, o número saía
+       cortado pela quina. Agora fica dentro. */
+    top: 10px;
+    right: 18px;
+    line-height: 1;
+    font-size: 3.4em;
+    /* Estava em 0.1: praticamente invisível. Numerar os passos é metade da
+       explicação — se não dá para ler o número, o passo perde a ordem. */
+    opacity: 0.28;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-accent);
 }
 
 .passo:hover {
@@ -614,6 +646,9 @@ html.sem-3d body {
 
 .passo h4 {
     color: var(--color-fg);
+    /* Espaço reservado para o numeral no canto: sem isso, "No ar, com
+       suporte" encostava no 4. */
+    padding-right: 52px;
     margin-bottom: 10px;
     font-size: 1.2em;
 }
@@ -841,10 +876,22 @@ html.sem-3d body {
 }
 
 /* Cartão em destaque na grade de preços (plano "mais contratado") */
+/* Um plano destacado, e só um. Dois cartões em destaque é o mesmo que
+   nenhum: a pessoa fica sem saber qual você recomenda e escolhe pelo preço
+   mais baixo. O destaque aqui é borda, elevação e sombra — nunca texto
+   ciano, para não disputar atenção com o botão "Contratar". */
 .price-card--destaque {
     position: relative;
-    transform: translateY(-6px);
-    border-color: rgba(53, 198, 232, 0.5);
+    transform: translateY(-10px);
+    border-color: rgba(53, 198, 232, 0.65);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.14) 0%, rgba(53, 198, 232, 0.02) 70%);
+    box-shadow: var(--shadow-lg);
+}
+
+/* A listra de cima aparece sozinha no plano destacado; nos outros ela só
+   surge quando o mouse passa por cima. */
+.price-card--destaque::before {
+    opacity: 1;
 }
 
 /* Selos soltos abaixo dos cards de serviço */
@@ -896,6 +943,8 @@ html.sem-3d body {
 
 @media (max-width: 768px) {
     .price-card--destaque {
+        /* Empilhado, "subir 10px" não diz nada — quem separa é a borda,
+           o fundo e a listra, que continuam valendo. */
         transform: none;
     }
 

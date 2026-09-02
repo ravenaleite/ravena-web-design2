@@ -45,28 +45,61 @@ function montarCena() {
         renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
-        camera.position.set(0, 0, 6);
+        camera.position.set(0, 0, 5.4);
 
-        // Gema facetada em cristal ciano-metálico sobre azul profundo, com núcleo
-        // rosa-neon visível entre as facetas — o par de acentos da marca.
+        /* Ambiente para a gema refletir.
+
+           Material metálico só tem brilho se houver alguma coisa em volta para
+           refletir. Antes não havia nada — metalness 0.6 sem ambiente nenhum —
+           e por isso a gema saía escura e sem graça, parecendo uma pedra cinza.
+           Aqui um degradê é pintado num canvas, virado em textura equirretangular
+           e pré-filtrado pelo PMREMGenerator: custa alguns milissegundos, não
+           baixa arquivo nenhum, e é o que faz cada faceta ter brilho próprio. */
+        function ambienteDaCena() {
+            const c = document.createElement('canvas');
+            c.width = 64; c.height = 32;
+            const g = c.getContext('2d');
+            const deg = g.createLinearGradient(0, 0, 0, 32);
+            deg.addColorStop(0.00, '#dff4ff');   /* "céu": estourado, vira o brilho de cima */
+            deg.addColorStop(0.42, '#35C6E8');   /* o ciano da marca, no meio */
+            deg.addColorStop(0.72, '#123049');
+            deg.addColorStop(1.00, '#05080f');   /* "chão": escuro, dá o contorno embaixo */
+            g.fillStyle = deg;
+            g.fillRect(0, 0, 64, 32);
+            const tex = new THREE.CanvasTexture(c);
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pmrem = new THREE.PMREMGenerator(renderer);
+            const alvo = pmrem.fromEquirectangular(tex).texture;
+            pmrem.dispose();
+            tex.dispose();
+            return alvo;
+        }
+
+        scene.environment = ambienteDaCena();
+
+        // Gema facetada em cristal ciano sobre azul profundo, com núcleo aceso
+        // visível entre as facetas.
         gemMat = new THREE.MeshPhysicalMaterial({
-            color: 0xbfe9ff,
-            metalness: 0.6,
-            roughness: 0.08,
+            color: 0xdff2ff,
+            /* Menos metal e um pouco mais de rugosidade que antes: com ambiente
+               para refletir, 0.6 virava espelho e sumia com as facetas. */
+            metalness: 0.32,
+            roughness: 0.14,
             clearcoat: 1,
-            clearcoatRoughness: 0.04,
+            clearcoatRoughness: 0.06,
             reflectivity: 1,
             transmission: 0.15,
-            emissive: 0x0a1a33,
+            envMapIntensity: 1.5,
+            emissive: 0x0d2438,
             flatShading: true,
         });
-        gem = new THREE.Mesh(new THREE.IcosahedronGeometry(1.35, 0), gemMat);
+        gem = new THREE.Mesh(new THREE.IcosahedronGeometry(1.55, 0), gemMat);
         scene.add(gem);
 
         const coreMat = new THREE.MeshBasicMaterial({
-            color: 0xff0080, transparent: true, opacity: 0.35,
+            color: 0x35C6E8, transparent: true, opacity: 0.42,
         });
-        gemCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55, 0), coreMat);
+        gemCore = new THREE.Mesh(new THREE.IcosahedronGeometry(0.62, 0), coreMat);
         scene.add(gemCore);
 
         // Partículas sutis ao redor
@@ -87,12 +120,12 @@ function montarCena() {
         }));
         scene.add(particles);
 
-        // Luz branco-azulada neutra, com leve contorno rosa-neon
-        scene.add(new THREE.HemisphereLight(0xffffff, 0x0d1330, 0.6));
-        key = new THREE.PointLight(0xcfe9ff, 1.2, 12);
+        // Luz branco-azulada neutra, com contorno azul do lado oposto
+        scene.add(new THREE.HemisphereLight(0xffffff, 0x0d1330, 0.75));
+        key = new THREE.PointLight(0xcfe9ff, 1.6, 14);
         key.position.set(4, 2, 6);
         scene.add(key);
-        rim = new THREE.DirectionalLight(0xff0080, 0.4);
+        rim = new THREE.DirectionalLight(0x2E9FD4, 0.55);
         rim.position.set(-5, -2, 5);
         scene.add(rim);
 
