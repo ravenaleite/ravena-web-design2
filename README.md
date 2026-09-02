@@ -13,12 +13,11 @@ WEB SITE NOVO VS CODE/
 ├── styles.css            # Estilos do site
 ├── script.js             # Cena 3D (Three.js) + entrada suave ao rolar
 ├── favicon.png           # Ícone da aba do navegador
-├── favicon.ico           # Mesmo ícone no formato que o navegador pede sozinho
 ├── apple-touch-icon.png  # Ícone na tela de início do iPhone/iPad
 ├── og-image.png          # Preview ao compartilhar o link (1200×630)
 ├── grao.png              # Grão de filme sobreposto à página
 ├── textura-glitch.svg    # Grade pontilhada do fundo
-├── sobre-mim.jpg         # Foto do "Sobre mim" (800×800)
+├── sobre-mim.jpg         # Foto do "Sobre mim" (640×640)
 ├── trabalho-1.png        # Portfólio — print do demo da Barbearia Dom Carlos
 ├── trabalho-2.png        # Portfólio — print do demo Sabor do Sertão
 ├── trabalho-3.png        # Portfólio — print do demo Sorriso Claro
@@ -46,15 +45,15 @@ Ferramentas de desenvolvimento (fora do Git, não vão para o cliente):
 - ✅ Degrada com elegância: se o CDN cair ou o hash de integridade não bater, a
   página abre inteira e o cartão da cena para de se anunciar como botão
 - ✅ Paleta tech/neon: azul profundo com gradientes ciano e rosa como destaque
-- ✅ Tipografia Bebas Neue (títulos) + Inter (texto)
+- ✅ Tipografia Space Grotesk (títulos) + Inter (texto)
 - ✅ Responsivo, com breakpoints em 420px, 768px e 1024px
 - ✅ Integração WhatsApp, com botão flutuante que some na seção de contato
-- ✅ Galeria de trabalhos em molduras de celular, cada uma abrindo o demo navegável
+- ✅ Faixa rolante fixa no topo e galeria de trabalhos em molduras de celular
 - ✅ Google Maps incorporado (Salgueiro-PE e Mauriti-CE), sem chave de API
 - ✅ Entrada suave ao rolar, conduzida pelo `script.js` (se o JS não rodar, o
   conteúdo continua visível)
 - ✅ Acessível: contraste WCAG AA verificado, skip link, navegação por teclado,
-  respeita `prefers-reduced-motion` (grão, scroll suave e entradas param)
+  respeita `prefers-reduced-motion` (faixa, grão, scroll suave e entradas param)
 - ✅ SEO: meta description, Open Graph, Twitter Card, canonical e dados
   estruturados de negócio local (`ProfessionalService`)
 
@@ -79,19 +78,36 @@ As cores ficam centralizadas em variáveis no topo de `styles.css`, dentro de `:
 
 ```css
 :root {
-    --color-bg: #0a0e27;               /* fundo (azul muito escuro) */
-    --color-fg: #e0e7ff;               /* títulos e texto de destaque */
-    --color-accent: #00d4ff;           /* ciano — cor de ação (botões, links) */
-    --color-accent-secondary: #ff0080; /* rosa — segundo acento */
-    --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
-    --gradient-accent: linear-gradient(135deg, #ff0080 0%, #ff6b00 100%);
+    /* Superfícies */
+    --color-surface-deep: #060911;     /* cabeçalho e rodapé */
+    --color-bg: #0A0E1E;               /* fundo da página */
+    --color-surface: #141B2E;          /* cartões */
+
+    /* Texto — três níveis, só */
+    --color-fg: #EDF1FB;               /* títulos, preços, destaques */
+    --color-text: #D2D9E9;             /* corpo */
+    --color-text-muted: #A3ACC3;       /* apoio, listas, legendas */
+
+    /* Ação */
+    --color-accent: #35C6E8;           /* botões, links, foco */
+    --color-accent-deep: #0F6E8C;      /* bordas e estados */
+
+    /* Segunda cor — só o botão flutuante do WhatsApp */
+    --color-accent-secondary: #FF3D8A;
 }
 ```
 
+> ⚠️ **A regra que segura o visual: o ciano é a cor do que se pode clicar.**
+> Nenhum título é ciano. É isso que faz o botão ser a coisa mais brilhante da
+> tela — que é exatamente onde a pessoa precisa clicar para virar cliente. Se
+> um dia você pintar um título de ciano, o botão se perde no meio.
+
 Troque esses valores para mudar a paleta inteira de uma vez. **Ao trocar,
 confira o contraste de novo** (`python3 auditar.py .`) — a paleta atual passa em
-WCAG AA e uma cor nova pode reprovar. As cores da gema 3D ficam em `script.js`,
-nas constantes `gemMat`, `coreMat` e nas luzes (`key`, `rim`).
+WCAG AA com folga (o texto mais fraco dá 8,4:1, o mínimo é 4,5:1) e uma cor nova
+pode reprovar. Evite ciano 100% saturado em texto grande: passa no teste de
+contraste e mesmo assim brilha e cansa a vista. As cores da gema 3D ficam em
+`script.js`, nas constantes `gemMat`, `coreMat` e nas luzes (`key`, `rim`).
 
 ### 4. Publicar (Netlify + GitHub)
 

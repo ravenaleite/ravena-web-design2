@@ -1,40 +1,47 @@
 :root {
-    /* Paleta Tech/Moderno: gradientes, neon, profundo */
-    --color-bg: #0a0e27;                    /* azul muito escuro */
-    --color-bg-alt: #1a1f3a;                /* azul mais claro para variação */
-    --color-surface: #151a2f;               /* cards */
-    --color-surface-deep: #050810;          /* headers/footers */
+    /* --------------------------------------------------------------------
+       PALETA — cinco famílias, e cada uma tem um trabalho só.
 
-    /* Gradientes principais */
-    --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);     /* ciano->azul */
-    --gradient-accent: linear-gradient(135deg, #ff0080 0%, #ff6b00 100%);      /* pink->laranja */
-    --gradient-glow: linear-gradient(135deg, #00d4ff 0%, #9d4edd 100%);        /* ciano->roxo */
+       A regra que segura tudo: o ciano é a cor do que se pode clicar.
+       Título nenhum é ciano. Assim o botão é a coisa mais brilhante da
+       tela, que é onde a pessoa precisa clicar para virar cliente.
+       -------------------------------------------------------------------- */
 
-    /* Cores base */
-    --color-fg: #e0e7ff;                    /* texto principal, branco-azul */
-    --color-fg-rgb: 224, 231, 255;
-    --color-accent: #00d4ff;                /* ciano brilhante */
-    --color-accent-light: #00ffff;          /* ciano mais claro */
-    --color-accent-secondary: #ff0080;      /* pink accent */
-    --color-accent-rgb: 0, 212, 255;
+    /* Superfícies — do mais fundo ao mais claro */
+    --color-surface-deep: #060911;          /* cabeçalho e rodapé */
+    --color-bg: #0A0E1E;                    /* fundo da página */
+    --color-bg-alt: #131A30;                /* variação de fundo */
+    --color-surface: #141B2E;               /* cartões */
+    --color-device: #1E293B;                /* moldura dos celulares */
 
-    --color-text: #e0e7ff;
-    --color-text-muted: #a5b4fc;
-    --color-text-subtle: #818cf8;
-    --color-text-faint: #6366f1;
-    --color-device: #1e293b;
+    /* Texto — três níveis, só */
+    --color-fg: #EDF1FB;                    /* títulos, preços, destaques */
+    --color-text: #D2D9E9;                  /* corpo */
+    --color-text-muted: #A3ACC3;            /* apoio, listas, legendas */
 
-    --font-display: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+    /* Ação — um ciano só */
+    --color-accent: #35C6E8;                /* botões, links, foco */
+    --color-accent-deep: #0F6E8C;           /* bordas e estados */
+
+    /* Segunda cor — existe num lugar só: o botão flutuante do WhatsApp */
+    --color-accent-secondary: #FF3D8A;
+
+    --gradient-primary: linear-gradient(135deg, #48D0EE 0%, #1E9BD0 100%);
+    --gradient-accent: linear-gradient(135deg, #FF3D8A 0%, #E0206B 100%);
+
+    --font-display: 'Space Grotesk', 'Segoe UI', Tahoma, sans-serif;
     --font-body: 'Inter', Arial, sans-serif;
 
     --hero-size: 360px;
     --hero-gap: 120px;
 
-    /* Sombras modernas */
-    --shadow-sm: 0 4px 6px rgba(0, 212, 255, 0.1);
-    --shadow-md: 0 10px 25px rgba(0, 212, 255, 0.15);
-    --shadow-lg: 0 25px 50px rgba(0, 212, 255, 0.2);
+    /* Sombras neutras. Antes eram brilhos ciano em tudo — era o que dava
+       o ar de neon de loja de jogos. */
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.34);
+    --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.42);
 }
+
 
 * {
     margin: 0;
@@ -85,20 +92,28 @@ body::before {
     width: 100%;
     height: 100%;
     background:
-        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 0, 128, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(53, 198, 232, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(53, 198, 232, 0.03) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
 }
 
 h1, h2, h3, h4, .price-card .price {
     font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    /* Antes: gradiente ciano recortado no texto. Todo título da página era
+       ciano, então nada se destacava — inclusive o botão. Agora o título é
+       quase branco e o ciano ficou livre para marcar o que é clicável. */
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    /* A Bebas era uma fonte muito baixa, então a entrelinha 1.7 herdada do
+       corpo passava despercebida. Com uma fonte de altura normal, 1.7 abre
+       buracos entre as linhas do título. */
+    line-height: 1.12;
+    color: var(--color-fg);
+}
+
+h4 {
+    line-height: 1.25;
 }
 
 /* Grão de filme com opacidade menor (design mais limpo) */
@@ -167,7 +182,7 @@ body::after {
 
 a:focus-visible,
 .scene-card:focus-visible {
-    outline: 3px solid var(--color-accent-light);
+    outline: 3px solid var(--color-accent);
     outline-offset: 3px;
 }
 
@@ -217,13 +232,13 @@ html.sem-3d body {
     z-index: 2;
     cursor: grab;
     border: 2px solid transparent;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-    box-shadow: 0 0 60px rgba(0, 212, 255, 0.3), inset 0 0 60px rgba(0, 212, 255, 0.1);
+    background: radial-gradient(circle, rgba(53, 198, 232, 0.1) 0%, transparent 70%);
+    box-shadow: 0 0 60px rgba(53, 198, 232, 0.3), inset 0 0 60px rgba(53, 198, 232, 0.1);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .scene-card:hover {
-    box-shadow: 0 0 100px rgba(0, 212, 255, 0.5), inset 0 0 80px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 100px rgba(53, 198, 232, 0.5), inset 0 0 80px rgba(53, 198, 232, 0.2);
     transform: translate(-50%, -50%) scale(1.05);
 }
 
@@ -237,23 +252,25 @@ html.sem-3d body {
     z-index: 10;
     padding: 60px 20px 40px;
     text-align: center;
-    background: linear-gradient(180deg, rgba(21, 26, 47, 0.8) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(20, 27, 46, 0.8) 0%, transparent 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    border-bottom: 1px solid rgba(53, 198, 232, 0.1);
 }
 
 .site-header h1 {
-    font-size: clamp(2.5em, 8vw, 4.5em);
+    /* Era clamp(2.5em, 8vw, 4.5em) — 72px, maior que o título do hero logo
+       abaixo. Assinatura não pode gritar mais alto que a frase que vende. */
+    font-size: clamp(1.45em, 3.6vw, 2em);
     margin-bottom: 10px;
-    letter-spacing: 0.03em;
+    letter-spacing: -0.01em;
 }
 
 .site-header p {
-    font-size: clamp(1em, 3vw, 1.3em);
-    color: var(--color-text-muted);
+    font-size: clamp(1em, 3vw, 1.2em);
+    color: var(--color-text);
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.005em;
 }
 
 /* Navegação do cabeçalho — leva às seções, sem competir com o h1 grande */
@@ -285,7 +302,7 @@ html.sem-3d body {
 
 .site-nav a:hover {
     color: var(--color-fg);
-    border-color: rgba(0, 212, 255, 0.25);
+    border-color: rgba(53, 198, 232, 0.25);
 }
 
 .site-nav a.nav-cta {
@@ -351,16 +368,16 @@ html.sem-3d body {
     margin-top: var(--hero-gap);
     padding: 60px 20px;
     text-align: center;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 0, 128, 0.05) 100%);
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.05) 0%, rgba(53, 198, 232, 0) 70%);
+    border: 1px solid rgba(53, 198, 232, 0.2);
     border-radius: 12px;
-    box-shadow: 0 0 70px rgba(0, 212, 255, 0.06);
+    box-shadow: 0 0 70px rgba(53, 198, 232, 0.06);
 }
 
 .hero h2 {
     font-size: clamp(2em, 6vw, 3.5em);
     margin-bottom: 20px;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.025em;
     /* Equilibra o comprimento das linhas em vez de encher a primeira até o
        limite: sem isso o título quebrava em "...achado e / pra ser chamado",
        deixando a conjunção pendurada. Navegador que não conhece, ignora. */
@@ -385,7 +402,7 @@ html.sem-3d body {
     text-wrap: balance;
     margin-top: 16px;
     font-size: 0.85em;
-    color: var(--color-text-subtle);
+    color: var(--color-text-muted);
     letter-spacing: 0.01em;
 }
 
@@ -394,7 +411,7 @@ html.sem-3d body {
     margin: 80px 0;
     padding: 60px 30px;
     background: linear-gradient(135deg, rgba(21, 26, 47, 0.6) 0%, rgba(21, 26, 47, 0.4) 100%);
-    border: 1px solid rgba(0, 212, 255, 0.15);
+    border: 1px solid rgba(53, 198, 232, 0.15);
     border-radius: 12px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -421,7 +438,7 @@ html.sem-3d body {
 .section h3 {
     font-size: clamp(1.8em, 5vw, 2.8em);
     margin-bottom: 20px;
-    letter-spacing: 0.03em;
+    letter-spacing: -0.02em;
 }
 
 .section > p,
@@ -439,7 +456,7 @@ html.sem-3d body {
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--color-text-muted);
     margin-bottom: 10px;
 }
 
@@ -481,15 +498,15 @@ html.sem-3d body {
     max-width: 340px;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(53, 198, 232, 0.2);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 0, 128, 0.05) 100%);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.05) 0%, rgba(53, 198, 232, 0) 70%);
 }
 
 .trabalho:hover {
     transform: translateY(-10px);
-    border-color: rgba(0, 212, 255, 0.5);
-    box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 212, 255, 0.3);
+    border-color: rgba(53, 198, 232, 0.5);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(53, 198, 232, 0.3);
 }
 
 .trabalho a {
@@ -504,7 +521,7 @@ html.sem-3d body {
     border-radius: 20px;
     padding: 8px;
     margin: 15px;
-    box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.1);
+    box-shadow: inset 0 0 20px rgba(53, 198, 232, 0.1);
 }
 
 .moldura::before {
@@ -537,7 +554,7 @@ html.sem-3d body {
 
 .trabalho figcaption b {
     display: block;
-    color: var(--color-accent);
+    color: var(--color-fg);
     margin-bottom: 5px;
     font-weight: 600;
 }
@@ -569,8 +586,8 @@ html.sem-3d body {
 
 .passo {
     padding: 30px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(255, 0, 128, 0.08) 100%);
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.08) 0%, rgba(53, 198, 232, 0) 70%);
+    border: 1px solid rgba(53, 198, 232, 0.2);
     border-radius: 12px;
     position: relative;
     overflow: hidden;
@@ -586,17 +603,17 @@ html.sem-3d body {
     font-size: 4em;
     opacity: 0.1;
     font-weight: bold;
-    color: var(--color-accent);
+    color: var(--color-fg);
 }
 
 .passo:hover {
     transform: translateY(-5px);
-    border-color: rgba(0, 212, 255, 0.4);
+    border-color: rgba(53, 198, 232, 0.4);
     box-shadow: var(--shadow-md);
 }
 
 .passo h4 {
-    color: var(--color-accent);
+    color: var(--color-fg);
     margin-bottom: 10px;
     font-size: 1.2em;
 }
@@ -616,8 +633,8 @@ html.sem-3d body {
 
 .service-card {
     padding: 30px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.06) 0%, rgba(255, 0, 128, 0.06) 100%);
-    border: 1px solid rgba(0, 212, 255, 0.15);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.06) 0%, rgba(53, 198, 232, 0) 70%);
+    border: 1px solid rgba(53, 198, 232, 0.15);
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
@@ -638,7 +655,7 @@ html.sem-3d body {
 
 .service-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(0, 212, 255, 0.3);
+    border-color: rgba(53, 198, 232, 0.3);
     box-shadow: var(--shadow-md);
 }
 
@@ -647,7 +664,7 @@ html.sem-3d body {
 }
 
 .service-card h4 {
-    color: var(--color-accent);
+    color: var(--color-fg);
     margin-bottom: 10px;
     font-size: 1.1em;
 }
@@ -678,14 +695,14 @@ html.sem-3d body {
     border-radius: 12px;
     overflow: hidden;
     aspect-ratio: 1;
-    border: 2px solid rgba(0, 212, 255, 0.3);
+    border: 2px solid rgba(53, 198, 232, 0.3);
 }
 
 .sobre-foto::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(53, 198, 232, 0.2) 0%, transparent 100%);
     z-index: 10;
     pointer-events: none;
 }
@@ -704,13 +721,13 @@ html.sem-3d body {
 }
 
 .sobre-nome {
-    color: var(--color-accent);
+    color: var(--color-fg);
     font-weight: 600;
     font-size: 1.3em;
 }
 
 .sobre-destaque {
-    color: var(--color-accent-light);
+    color: var(--color-fg);
     font-size: 1.1em;
     font-weight: 600;
     font-style: italic;
@@ -732,8 +749,8 @@ html.sem-3d body {
     display: flex;
     flex-direction: column;
     padding: 52px 30px 40px;   /* topo maior: espaço reservado para a faixa do selo */
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(255, 0, 128, 0.08) 100%);
-    border: 2px solid rgba(0, 212, 255, 0.2);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.08) 0%, rgba(53, 198, 232, 0) 70%);
+    border: 2px solid rgba(53, 198, 232, 0.2);
     border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
@@ -754,7 +771,7 @@ html.sem-3d body {
 
 .price-card:hover {
     transform: translateY(-15px);
-    border-color: rgba(0, 212, 255, 0.5);
+    border-color: rgba(53, 198, 232, 0.5);
     box-shadow: var(--shadow-lg);
 }
 
@@ -763,7 +780,7 @@ html.sem-3d body {
 }
 
 .price-card h4 {
-    color: var(--color-accent);
+    color: var(--color-fg);
     font-size: 1.4em;
     margin-bottom: 15px;
 }
@@ -772,7 +789,7 @@ html.sem-3d body {
     font-size: 2.5em;
     margin: 15px 0;
     padding: 0 6px;
-    color: var(--color-accent-light);
+    color: var(--color-fg);
     font-weight: 700;
     display: inline-block;
     line-height: 1.15;
@@ -788,7 +805,7 @@ html.sem-3d body {
 }
 
 .price-parcelas {
-    color: var(--color-accent-light);
+    color: var(--color-text-muted);
     font-size: 0.85em;
     font-weight: 600;
     margin-top: -8px;
@@ -813,7 +830,7 @@ html.sem-3d body {
     content: "✓";
     position: absolute;
     left: 0;
-    color: var(--color-accent);
+    color: var(--color-text-muted);
     font-weight: bold;
 }
 
@@ -827,7 +844,7 @@ html.sem-3d body {
 .price-card--destaque {
     position: relative;
     transform: translateY(-6px);
-    border-color: rgba(0, 212, 255, 0.5);
+    border-color: rgba(53, 198, 232, 0.5);
 }
 
 /* Selos soltos abaixo dos cards de serviço */
@@ -841,9 +858,9 @@ html.sem-3d body {
 
 .beneficios span {
     padding: 10px 16px;
-    border: 1px solid rgba(0, 212, 255, 0.25);
+    border: 1px solid rgba(53, 198, 232, 0.25);
     border-radius: 999px;
-    background: rgba(0, 212, 255, 0.06);
+    background: rgba(53, 198, 232, 0.06);
     color: var(--color-text-muted);
     font-size: 0.9em;
 }
@@ -867,9 +884,9 @@ html.sem-3d body {
     max-width: 850px;
     padding: 16px 22px;
     text-align: center;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(53, 198, 232, 0.2);
     border-radius: 12px;
-    background: rgba(0, 212, 255, 0.05);
+    background: rgba(53, 198, 232, 0.05);
     color: var(--color-text-muted);
 }
 
@@ -896,15 +913,15 @@ footer {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    background: linear-gradient(180deg, var(--color-surface-deep) 0%, rgba(5, 8, 16, 0.8) 100%);
-    border-top: 1px solid rgba(0, 212, 255, 0.1);
+    background: linear-gradient(180deg, var(--color-surface-deep) 0%, rgba(6, 9, 17, 0.8) 100%);
+    border-top: 1px solid rgba(53, 198, 232, 0.1);
     color: var(--color-text-muted);
 }
 
 .footer-brand {
     font-family: var(--font-display);
     font-size: 1.2em;
-    letter-spacing: 0.03em;
+    letter-spacing: -0.01em;
     color: var(--color-fg);
 }
 
@@ -919,7 +936,7 @@ footer a {
 }
 
 footer a:hover {
-    color: var(--color-accent-light);
+    color: var(--color-accent);
     text-decoration: underline;
 }
 
@@ -983,7 +1000,7 @@ footer a:hover {
 
 #zapFlutuante:hover {
     transform: scale(1.15) translateY(-5px);
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+    box-shadow: 0 0 30px rgba(53, 198, 232, 0.6);
 }
 
 #zapFlutuante.oculto {
@@ -1135,9 +1152,11 @@ footer a:hover {
     right: 0;
     padding: 7px 10px;
     text-align: center;
-    background: rgba(0, 212, 255, 0.12);
-    border-bottom: 1px solid rgba(0, 212, 255, 0.25);
-    color: var(--color-accent-light);
+    /* Selo informa, não convida ao clique — por isso não é ciano. O ciano
+       da página inteira está reservado para botões e links. */
+    background: rgba(237, 241, 251, 0.07);
+    border-bottom: 1px solid rgba(237, 241, 251, 0.14);
+    color: var(--color-fg);
     font-weight: 700;
     font-size: 0.75em;
     letter-spacing: 0.08em;
@@ -1175,8 +1194,8 @@ footer a:hover {
     text-align: center;
     padding: 60px 30px;
     margin: 80px 0;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(255, 0, 128, 0.08) 100%);
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: linear-gradient(160deg, rgba(53, 198, 232, 0.08) 0%, rgba(53, 198, 232, 0) 70%);
+    border: 1px solid rgba(53, 198, 232, 0.2);
     border-radius: 12px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -1216,16 +1235,16 @@ footer a:hover {
     min-height: 44px;
     padding: 8px 20px;
     border-radius: 999px;
-    border: 1px solid rgba(0, 212, 255, 0.25);
-    color: var(--color-accent-light);
+    border: 1px solid rgba(53, 198, 232, 0.25);
+    color: var(--color-accent);
     text-decoration: none;
     font-weight: 700;
     transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .contact-phones a:hover {
-    border-color: rgba(0, 212, 255, 0.6);
-    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(53, 198, 232, 0.6);
+    background: rgba(53, 198, 232, 0.08);
     text-decoration: none;
 }
 
@@ -1244,7 +1263,7 @@ footer a:hover {
 }
 
 .contact-meta {
-    color: var(--color-text-subtle);
+    color: var(--color-text-muted);
 }
 
 .contact-meta--email {
@@ -1273,7 +1292,7 @@ footer a:hover {
 .map-frame {
     width: 100%;
     height: 220px;
-    border: 1px solid rgba(0, 212, 255, 0.25);
+    border: 1px solid rgba(53, 198, 232, 0.25);
     border-radius: 10px;
     display: block;
     /* Só escurece e dessatura, para o mapa assentar na paleta escura sem mentir
