@@ -71,6 +71,9 @@ body {
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
     position: relative;
+    /* Rede de seguranca: nenhuma palavra longa (link, e-mail, telefone)
+       pode empurrar a pagina para o lado numa tela estreita. */
+    overflow-wrap: break-word;
 }
 
 /* Fundo animado sutil */
@@ -1246,6 +1249,10 @@ footer a:hover {
 
 .contact-meta--email {
     margin-top: 10px;
+    /* O e-mail e uma palavra unica de 30 caracteres. Em tela de 320px ele nao
+       cabe inteiro na linha e empurrava a pagina para o lado. "anywhere" deixa
+       quebrar em qualquer ponto e ainda encolhe a largura minima do bloco. */
+    overflow-wrap: anywhere;
 }
 
 .contact-meta a {
