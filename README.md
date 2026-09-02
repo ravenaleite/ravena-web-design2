@@ -38,13 +38,22 @@ Ferramentas de desenvolvimento (fora do Git, não vão para o cliente):
 
 ## 🎨 Características
 
-- ✅ Cena 3D com Three.js, **carregada sob demanda**: os ~600 KB da biblioteca
-  só são baixados quando a conexão comporta. Com economia de dados ligada ou em
-  rede 2G/3G, ela nem é baixada — **em qualquer tamanho de tela, inclusive
-  celular** — e o layout se fecha sozinho pela classe `sem-3d`, sem salto
-- ✅ Degrada com elegância: se o CDN cair ou o hash de integridade não bater, a
-  página abre inteira e o cartão da cena para de se anunciar como botão
-- ✅ Paleta tech/neon: azul profundo com gradientes ciano e rosa como destaque
+- ✅ **A gema tem duas versões, e uma delas está sempre lá.** A de baixo é um
+  SVG de 2 KB desenhado no `index.html`: funciona sem JavaScript, sem WebGL e
+  sem rede. A de cima é a cena 3D em Three.js, ~600 KB baixados do CDN, que
+  entra por cima quando a conexão dá — e aí o SVG some por transição. Se a
+  cena 3D não vier (economia de dados, 2G, CDN fora do ar, hash de integridade
+  errado, celular sem WebGL), o SVG simplesmente fica. **O topo do site nunca
+  aparece vazio, e a gema nunca "some".**
+- ✅ O teste de rede é folgado de propósito: só barra a cena 3D em economia de
+  dados (escolha explícita de quem navega), em 2G, ou abaixo de 0,7 Mbps. Antes
+  ele barrava 3G e tudo abaixo de 1,5 Mbps — e como o `downlink` que o navegador
+  informa nos primeiros instantes é uma estimativa baixa que sobe depois, a cena
+  era barrada em conexão que dava conta
+- ✅ A gema 3D tem ambiente para refletir, gerado num `<canvas>` pelo
+  `PMREMGenerator` — sem ele, material metálico não tem o que refletir e sai
+  cinza e sem facetas
+- ✅ Paleta escura com um ciano só, reservado ao que é clicável
 - ✅ Tipografia Space Grotesk (títulos) + Inter (texto)
 - ✅ Responsivo, com breakpoints em 420px, 768px e 1024px
 - ✅ Integração WhatsApp, com botão flutuante que some na seção de contato

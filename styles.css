@@ -192,9 +192,41 @@ html.sem-3d .scene-card {
     display: none;
 }
 
-html.sem-3d body {
-    --hero-size: 0px;
-    --hero-gap: 0px;
+/* O espaço do topo NÃO fecha mais quando a cena 3D não carrega. Antes fechava
+   porque só havia a alternativa de deixar um buraco; agora existe a gema em
+   SVG, que ocupa o lugar e não pesa nada. */
+
+/* --------------------------------------------------------------- gema SVG */
+.gema-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--hero-size);
+    z-index: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.7s ease;
+}
+
+.gema-svg svg {
+    width: auto;
+    height: 82%;
+    max-width: 90vw;
+}
+
+/* Quando a cena 3D entra em cena de verdade, a desenhada sai de fininho. */
+html.com-3d .gema-svg {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gema-svg {
+        transition: none;
+    }
 }
 
 #canvas3d {

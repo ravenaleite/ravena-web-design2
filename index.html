@@ -85,13 +85,19 @@
         // bate no teto, o que é justamente o sinal de que dá para carregar.
         var banda = typeof rede.downlink === 'number' ? rede.downlink : null;
 
-        // 1,5 Mbps = os 600 KB levariam mais de 3 segundos só para chegar.
-        // Se o navegador não informa a banda, seguimos em frente: na dúvida,
-        // carrega — o pior caso aqui é uma decoração que demora, não um site
-        // quebrado.
+        // Este teste ficou mais folgado de propósito. Antes ele barrava 3G e
+        // qualquer banda abaixo de 1,5 Mbps — e o downlink que o navegador
+        // informa nos primeiros instantes da página é uma estimativa baixa,
+        // que sobe depois. Resultado: a gema 3D era barrada em conexão que
+        // dava conta.
+        //
+        // Podemos ser folgados agora porque existe a gema em SVG por baixo:
+        // se a versão 3D não vier, não sobra buraco nenhum. O que continua
+        // valendo é a economia de dados — essa é escolha explícita de quem
+        // está navegando, e a gente respeita.
         var apertada = rede.saveData === true ||
-                       /^(slow-2g|2g|3g)$/.test(rede.effectiveType || '') ||
-                       (banda !== null && banda > 0 && banda < 1.5);
+                       /^(slow-2g|2g)$/.test(rede.effectiveType || '') ||
+                       (banda !== null && banda > 0 && banda < 0.7);
 
         if (apertada) document.documentElement.classList.add('sem-3d');
     })();
@@ -106,7 +112,42 @@
 
 <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
-<!-- CENA 3D -->
+<!-- CENA 3D — a gema tem duas versões.
+
+     A de baixo é este SVG: 2 KB, desenhada, sempre presente, funciona sem
+     JavaScript e sem WebGL. A de cima é a cena 3D do script.js, que pesa 600 KB
+     e só entra quando dá. Quando ela entra, o SVG some por baixo; quando não dá
+     (economia de dados, rede fraca, CDN fora do ar, celular sem WebGL), o SVG
+     simplesmente fica. Assim o topo do site nunca aparece vazio. -->
+<div class="gema-svg" aria-hidden="true">
+  <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+        <stop offset="45%" stop-color="#35C6E8" stop-opacity=".16"/>
+        <stop offset="100%" stop-color="#35C6E8" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="faceA" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#EAF8FF"/><stop offset="100%" stop-color="#9CDCF2"/>
+      </linearGradient>
+      <linearGradient id="faceB" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#63D2EE"/><stop offset="100%" stop-color="#2E9FD4"/>
+      </linearGradient>
+      <linearGradient id="faceC" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2A9AC9"/><stop offset="100%" stop-color="#15597E"/>
+      </linearGradient>
+    </defs>
+    <circle cx="120" cy="120" r="118" fill="url(#halo)"/>
+    <circle cx="120" cy="120" r="86" stroke="#35C6E8" stroke-opacity=".22" stroke-width="1"/>
+    <g opacity=".34" stroke="#CFE9F7" stroke-width="1">
+      <path d="M120 34 L188 74 L188 154 L120 194 L52 154 L52 74 Z"/>
+      <path d="M120 34 L120 114 M120 114 L188 154 M120 114 L52 154"/>
+    </g>
+    <path d="M120 62 L166 88 L120 114 L74 88 Z" fill="url(#faceA)"/>
+    <path d="M166 88 L166 142 L120 168 L120 114 Z" fill="url(#faceC)"/>
+    <path d="M74 88 L120 114 L120 168 L74 142 Z" fill="url(#faceB)"/>
+  </svg>
+</div>
+
 <canvas id="canvas3d" aria-hidden="true"></canvas>
 <div class="canvas-overlay" aria-hidden="true"></div>
 <div class="scene-card"

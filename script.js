@@ -138,6 +138,11 @@ function montarCena() {
 
 /* ------------------------------------------------------------- interação */
 function iniciarCena() {
+    /* Só agora — com a cena montada e prestes a desenhar — a gema em SVG
+       recebe ordem de sair. Se qualquer coisa tivesse falhado antes daqui,
+       ela continuaria no lugar. */
+    document.documentElement.classList.add('com-3d');
+
     function resize() {
         const w = window.innerWidth;
         let h;
