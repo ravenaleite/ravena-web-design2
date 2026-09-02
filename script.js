@@ -273,14 +273,14 @@ if (canvas && !document.documentElement.classList.contains('sem-3d')) {
     const menosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const temObserver = 'IntersectionObserver' in window;
 
-    /* Título do Hero tem quebra de linha manual (&nbsp; no HTML) pensada pro
-       tamanho da Bebas Neue. Se ela não carregar — rede lenta, bloqueio de
-       terceiros — a fonte de fallback (Impact/Arial Narrow) é mais larga e
-       pode estourar o cartão. Em vez de confiar só na quebra manual, medimos
-       a linha mais larga de verdade e encolhemos a fonte em passos pequenos
-       até caber. Roda de novo ao redimensionar e quando as fontes terminam
-       de carregar, e sempre parte do tamanho original do CSS (nunca só
-       encolhe): a janela pode crescer de novo. */
+    /* Título do Hero tem quebra de linha manual (os &nbsp; no HTML mantêm
+       "pra ser achado" e "pra ser chamado" inteiros). Se a fonte de título não
+       carregar — rede lenta, bloqueio de terceiros —, a de reserva tem outra
+       largura e a quebra planejada pode estourar o cartão. Em vez de confiar
+       só na quebra manual, medimos a linha mais larga de verdade e encolhemos
+       a fonte em passos pequenos até caber. Roda de novo ao redimensionar e
+       quando as fontes terminam de carregar, e sempre parte do tamanho
+       original do CSS (nunca só encolhe): a janela pode crescer de novo. */
     function ajustarTituloHero() {
         const h2 = document.querySelector('.hero h2');
         if (!h2) return;
