@@ -18,7 +18,7 @@ WEB SITE NOVO VS CODE/
 ├── og-image.png          # Preview ao compartilhar o link (1200×630)
 ├── grao.png              # Grão de filme sobreposto à página
 ├── textura-glitch.svg    # Grade pontilhada do fundo
-├── sobre-mim.jpg         # Foto do "Sobre mim" (640×640)
+├── sobre-mim.jpg         # Foto do "Sobre mim" (800×800)
 ├── trabalho-1.png        # Portfólio — print do demo da Barbearia Dom Carlos
 ├── trabalho-2.png        # Portfólio — print do demo Sabor do Sertão
 ├── trabalho-3.png        # Portfólio — print do demo Sorriso Claro
@@ -49,12 +49,12 @@ Ferramentas de desenvolvimento (fora do Git, não vão para o cliente):
 - ✅ Tipografia Bebas Neue (títulos) + Inter (texto)
 - ✅ Responsivo, com breakpoints em 420px, 768px e 1024px
 - ✅ Integração WhatsApp, com botão flutuante que some na seção de contato
-- ✅ Faixa rolante fixa no topo e galeria de trabalhos em molduras de celular
+- ✅ Galeria de trabalhos em molduras de celular, cada uma abrindo o demo navegável
 - ✅ Google Maps incorporado (Salgueiro-PE e Mauriti-CE), sem chave de API
 - ✅ Entrada suave ao rolar, conduzida pelo `script.js` (se o JS não rodar, o
   conteúdo continua visível)
 - ✅ Acessível: contraste WCAG AA verificado, skip link, navegação por teclado,
-  respeita `prefers-reduced-motion` (faixa, grão, scroll suave e entradas param)
+  respeita `prefers-reduced-motion` (grão, scroll suave e entradas param)
 - ✅ SEO: meta description, Open Graph, Twitter Card, canonical e dados
   estruturados de negócio local (`ProfessionalService`)
 
