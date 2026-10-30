@@ -18,10 +18,12 @@ WEB SITE NOVO VS CODE/
 ├── grao.png              # Grão de filme sobreposto à página
 ├── textura-glitch.svg    # Grade pontilhada do fundo
 ├── sobre-mim.jpg         # Foto do "Sobre mim" (640×640)
-├── trabalho-1.png        # Portfólio — print do demo da Barbearia Dom Carlos
-├── trabalho-2.png        # Portfólio — print do demo Sabor do Sertão
-├── trabalho-3.png        # Portfólio — print do demo Sorriso Claro
-├── demos/                # Projetos demonstrativos (portfólio navegável)
+├── trabalho-ts-transportes.png  # Portfólio — print do site da TS Transportes
+├── trabalho-rastreador.png      # Portfólio — print do Rastreador de candidaturas
+├── trabalho-1.png        # Print do demo da Barbearia Dom Carlos (fora da galeria)
+├── trabalho-2.png        # Print do demo Sabor do Sertão (fora da galeria)
+├── trabalho-3.png        # Print do demo Sorriso Claro (fora da galeria)
+├── demos/                # Projetos demonstrativos (fora da galeria, links seguem no ar)
 │   ├── barbearia-dom-carlos.html        # Salgueiro-PE · escuro + dourado
 │   ├── lanchonete-sabor-do-sertao.html  # Mauriti-CE · creme + terracota
 │   ├── clinica-sorriso-claro.html       # duas unidades · branco + teal
@@ -139,7 +141,16 @@ só ficam de fora porque estão no `.gitignore`.
 
 ## 📝 Edições Comuns
 
-### Portfólio: projetos demonstrativos
+### Portfólio: projetos reais
+
+A galeria da página principal mostra só projetos reais e no ar. Para incluir
+outro, copie um `<figure class="trabalho trabalho--tela">` em `index.html` e
+troque o link, o print, o `alt` e a legenda.
+
+### Projetos demonstrativos
+
+Eles saíram da galeria, mas os arquivos continuam publicados porque o perfil do
+GitHub e os repositórios das demos apontam para esses endereços.
 
 A pasta `demos/` tem três sites completos e navegáveis, criados para negócios
 fictícios da região. Cada um usa uma paleta e uma tipografia diferentes — a
@@ -151,8 +162,7 @@ saem do índice do Google por `noindex`. **Não remova esse aviso.** Demo assumi
 enganosa.
 
 Os arquivos `trabalho-1.png`, `trabalho-2.png` e `trabalho-3.png` são as
-miniaturas exibidas na galeria da página principal. Para deixá-las idênticas ao
-site renderizado:
+miniaturas dos demos. Para deixá-las idênticas ao site renderizado:
 
 1. Abra o demo no `preview-mobile.html` pelo Live Server
 2. Escolha "iPhone 14 Pro / 15" na lista de aparelhos
@@ -163,9 +173,6 @@ site renderizado:
 > `index.html`, o `alt` da imagem, o `<title>` do arquivo em `demos/` e o texto
 > escrito dentro do próprio print. Se um deles ficar para trás, quem clica no
 > cartão cai num negócio com outro nome.
-
-Ao substituir por um **cliente real**, troque também o `alt` e a legenda em
-`index.html`, e remova a palavra "demonstrativo" daquele item.
 
 ### Trocar a foto do "Sobre mim"
 
