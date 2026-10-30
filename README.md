@@ -1,7 +1,7 @@
 # Ravena Web Design — site institucional
 
-Site de uma página para apresentar serviços de criação de sites e otimização de
-PC, com portfólio navegável e cena 3D decorativa carregada sob demanda.
+Site de uma página para apresentar serviços de criação de sites, com portfólio
+navegável e cena 3D decorativa carregada sob demanda.
 
 **No ar:** https://ravena-web-design-oficial.netlify.app/
 

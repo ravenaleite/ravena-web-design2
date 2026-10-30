@@ -174,7 +174,6 @@ body::after {
 #servicos,
 #precos,
 #sobre,
-#pc,
 #contato {
     scroll-margin-top: 16px;
     scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 16px);
@@ -1240,7 +1239,7 @@ footer a:hover {
 
 /* =============================================================================
    COMPLEMENTOS — seções que o index.html usa e este tema ainda não cobria
-   (contato, mapa, seção de PC, selo de plano, crédito do rodapé), no mesmo
+   (contato, mapa, selo de plano, crédito do rodapé), no mesmo
    estilo neon/gradiente do restante do arquivo.
    ========================================================================== */
 
@@ -1264,32 +1263,16 @@ footer a:hover {
     letter-spacing: 0.08em;
 }
 
-/* "Sobre" e "PC" não têm parágrafo de apoio ao lado do título, então usam
+/* "Sobre" não tem parágrafo de apoio ao lado do título, então usa
    etiqueta + título soltos em vez do bloco .section-heading. Estas duas regras
    igualam o espaçamento ao das demais seções, para a fila de títulos manter o
    mesmo ritmo de cima a baixo. */
-.section--sobre > .eyebrow,
-.section--pc > .eyebrow {
+.section--sobre > .eyebrow {
     margin-bottom: 10px;
 }
 
-.section--sobre > h3,
-.section--pc > h3 {
+.section--sobre > h3 {
     margin-bottom: 10px;
-}
-
-.section--pc {
-    text-align: center;
-}
-
-.section--pc .services {
-    text-align: center;
-}
-
-.pc-nota {
-    color: var(--color-text-muted);
-    max-width: 60ch;
-    margin: 6px auto 22px;
 }
 
 .contact {
